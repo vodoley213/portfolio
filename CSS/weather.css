@@ -1,0 +1,168 @@
+/* Utility classes */
+
+.margin-block-600 {
+  margin-block: var(--size-600);
+}
+.margin-bottom-600 {
+  margin-bottom: var(--size-600);
+}
+.margin-top-400 {
+  margin-top: var(--size-400);
+}
+.fs-city {
+  font-size: 2em;
+}
+
+.fs-weather {
+  font-size: 2em;
+}
+
+.fs-weather-small {
+  font-size: 1.5em;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* card-weather */
+
+.cities-block {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); */
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-400);
+}
+
+@media (max-width: 60em) {
+  .cities-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-weather {
+  padding: 1em 1em 0 1em;
+  background-color: #0666b2;
+}
+.temp-middle-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.city-location {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.city-location > img {
+  width: var(--font-size-medium);
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.add-city {
+  width: calc(2 * var(--font-size-big));
+  aspect-ratio: 1;
+  object-fit: contain;
+  margin-inline: auto;
+  fill: none;
+  stroke: var(--color-text-white);
+  cursor: pointer;
+}
+.add-city:hover {
+  stroke: var(--color-main-accent);
+}
+
+.daily-temperatura {
+  margin-top: var(--size-400);
+  display: grid;
+  gap: var(--size-200);
+}
+
+.today-degrees {
+  display: flex;
+  align-items: center;
+}
+
+.today-degrees > img {
+  width: calc(2 * var(--font-size-medium));
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.icon-large {
+  width: 7rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.icon-medium {
+  width: 4rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+@media (min-width: 75em) {
+  .icon-large {
+    width: 9rem;
+  }
+}
+
+@media (min-width: 67em) {
+  .icon-medium {
+    width: 6rem;
+  }
+}
+
+.current-day {
+  --color-day-backgound: #e02e46;
+
+  width: min-content;
+  margin-inline: auto;
+  padding: 0.5em 1em;
+  border-radius: 100vmax;
+  background-color: var(--color-day-backgound);
+
+  font-weight: var(--font-weight-bold);
+}
+
+.weather-conditions {
+  display: grid;
+  gap: var(--size-200);
+}
+
+.weather-conditions img {
+  width: calc(1.5 * var(--font-size-text));
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.weather-conditions > div {
+  display: flex;
+  gap: var(--size-300);
+}
+
+.temp-forcast {
+  /* display: grid;
+  grid-template-columns: repeat(5,1fr); */
+  display: flex;
+  justify-content: space-around;
+  gap: var(--size-600);
+  padding: 1em;
+  border-radius: 3em 3em 0 0;
+  background-image: linear-gradient(#05548f, #065fa3);
+}
+
+.temp-forcast > * {
+  flex: 1;
+  /* flex-shrink: 0; */
+}
+
+.card-day {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: start; */
+  align-items: center;
+}
