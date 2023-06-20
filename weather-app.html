@@ -134,13 +134,13 @@
               </div>
             </div> -->
           </div>
-          
+
           <!-- Шаблон погодной карты городов -->
           <template id="city-card-template">
             <div class="card-weather">
               <div class="city-location">
                 <img src="images/bx-current-location.svg" alt="" />
-                <h2 class="fs-city">Новосибирск</h2>
+                <h2 data-city-name class="fs-city"></h2>
               </div>
               <div class="temp-middle-row margin-top-400">
                 <div class="daily-temperatura">
@@ -151,33 +151,34 @@
                       alt=""
                     />
                     <div class="fs-weather fw-bold text-white">
-                      <span data-current-temp>33</span>&deg;
+                      <span data-current-temp></span>&deg;
                     </div>
                   </div>
                   <div class="text-white text-center">
-                    max. <span data-max-temp>35</span>&deg;C,
+                    max. <span data-max-temp></span>&deg;C,
                     <span class="no-wrap">
                       min.
-                      <span data-min-temp>34</span>&deg;C
+                      <span data-min-temp></span>&deg;C
                     </span>
                   </div>
                 </div>
                 <img class="icon-large" data-current-icon />
                 <div class="weather-conditions">
-                  <h3 data-weather-desc class="fs-weather fw-bold text-white">
-                    Thunderstorm
-                  </h3>
+                  <h3
+                    data-weather-desc
+                    class="fs-weather fw-bold text-white"
+                  ></h3>
                   <div class="text-white">
                     <img src="images/svg/weather-sunset.svg" />
-                    <span data-current-sunset>North-West</span>
+                    <span data-current-sunset></span>
                   </div>
                   <div class="text-white">
                     <img src="images/svg/wind-speed.svg" />
-                    <div><span data-current-wind-speed>25</span>km/h</div>
+                    <div><span data-current-wind-speed></span>km/h</div>
                   </div>
                   <div class="text-white">
                     <img src="images/svg/uv-index.svg" />
-                    <span data-current-uv>North-West</span>
+                    <span data-current-uv></span>
                   </div>
                 </div>
               </div>

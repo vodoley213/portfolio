@@ -1,17 +1,26 @@
-// https://api.open-meteo.com/v1/forecast?latitude=55.04&longitude=82.93&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,apparent_temperature_max,uv_index_max&current_weather=true&timeformat=unixtime&timezone=Asia%2FBangkok
-
-// Novosibirsk
-// const latitude = '55.04'
-// const longitude = '82.93'
-// const timezone = 'Asia%2FBangkok'
+let latitude, longitude, timezone, cityName
+const cityID = 14
 
 import { ICON_SET } from './weather-app-icons.js'
+import { CITIES_SET } from './weather-app-cities.js'
 import { getCurrentWeather, getWeatherForecast } from './parsing-weather-API.js'
+
+// console.log(CITIES_SET.get(1))
+
+function setCityCoordinates(cityID) {
+  cityName = CITIES_SET.get(cityID).city
+  latitude = CITIES_SET.get(cityID).latitude
+  longitude = CITIES_SET.get(cityID).longitude
+  timezone = CITIES_SET.get(cityID).timezone
+}
+
+setCityCoordinates(cityID)
 
 const URL =
   'https://api.open-meteo.com/v1/forecast?daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,apparent_temperature_max,uv_index_max&current_weather=true&timeformat=unixtime'
 
 const localTimeZone = Intl.DateTimeFormat(undefined).resolvedOptions().timeZone
+
 const timeRuFormatter = new Intl.DateTimeFormat(undefined, {
   timeStyle: 'short',
 }) // 22:00
@@ -72,7 +81,7 @@ const cityCardTemplate = document.querySelector('#city-card-template')
 citySection.innerHTML = ''
 const cityElement = cityCardTemplate.content.cloneNode(true)
 
-getWeather(55.04, 82.93, localTimeZone).then(putWeatherToCard)
+getWeather(latitude, longitude, timezone).then(putWeatherToCard)
 
 function putWeatherToCard({ currentWeather, weatherForecast }) {
   putCurrentWeather(currentWeather, weatherForecast)
@@ -80,9 +89,16 @@ function putWeatherToCard({ currentWeather, weatherForecast }) {
 }
 
 function putCurrentWeather(currentWeather, weatherForecast) {
-  const sunset = timeRuFormatter.format(currentWeather.sunset_time * 1000)
+  const timeOffset =
+    new Date().getTimezoneOffset() / 60 + CITIES_SET.get(cityID).UTC
+  const sunset = timeRuFormatter.format(
+    currentWeather.sunset_time * 1000 + timeOffset * 3600 * 1000
+    //   const sunset = timeRuFormatter.format(
+    // currentWeather.sunset_time * 1000 + timeOffset * 3600 * 1000
+  )
   const currentDate = getDateRuFormated(weatherForecast)
 
+  setValue('city-name', cityName)
   setValue('current-day', currentDate)
   setValue('current-temp', currentWeather.currentTemp)
   setValue('max-temp', currentWeather.maxTemp)
