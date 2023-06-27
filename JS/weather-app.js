@@ -35,6 +35,7 @@ citiesNav.addEventListener('click', e => {
     citiesForRender.push(cityId)
     renderCityCards([cityId])
     renderCitiesListForPopup()
+    saveCitiesToLS()
 
     citiesNav.removeAttribute('data-visible')
     primaryHeader.removeAttribute('data-overlay')
@@ -51,6 +52,7 @@ document.addEventListener('click', e => {
 
     cityCardForClose.remove()
     renderCitiesListForPopup()
+    saveCitiesToLS()
   }
 })
 
