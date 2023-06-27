@@ -1,8 +1,8 @@
-const primaryHeader = document.querySelector('.primary-header')
+export const primaryHeader = document.querySelector('.primary-header')
 const navToggle = document.querySelector('.mobile-nav-toggle')
 const primaryNav = document.querySelector('.primary-navigation')
 const iconHamburger = document.querySelector('.icon-hamburger')
-const iconClose = document.querySelector('.icon-close')
+
 const backButton = document.querySelector('.button-arrow')
 const scrollWatcher = document.createElement('div')
 const blurredImg = document.querySelectorAll('.blurred-img')
@@ -15,19 +15,17 @@ navToggle.addEventListener('click', () => {
   primaryNav.hasAttribute('data-visible')
     ? navToggle.setAttribute('aria-expanded', false)
     : navToggle.setAttribute('aria-expanded', true)
-  primaryNav.toggleAttribute('data-visible')
-  primaryHeader.toggleAttribute('data-overlay')
-  iconHamburger.classList.toggle('hide')
-  iconClose.classList.toggle('hide')
+  primaryHeader.dataset.overlay = ''
+  primaryNav.dataset.visible = ''
+  iconHamburger.classList.add('hide')
 })
 
 primaryNav.addEventListener('click', e => {
-  if (e.target.matches('a')) {
-    primaryNav.removeAttribute('data-visible')
-    primaryHeader.removeAttribute('data-overlay')
-    iconClose.classList.add('hide')
-    iconHamburger.classList.remove('hide')
-  }
+  if (e.target.matches('a')) closeNavBars()
+})
+
+document.addEventListener('click', e => {
+  if (e.target.matches('[data-overlay]')) closeNavBars()
 })
 
 backButton?.addEventListener('click', () => {
@@ -54,3 +52,9 @@ blurredImg.forEach(div => {
     img.addEventListener('load', loaded)
   }
 })
+
+function closeNavBars() {
+  primaryNav.removeAttribute('data-visible')
+  iconHamburger.classList.remove('hide')
+  primaryHeader.removeAttribute('data-overlay')
+}

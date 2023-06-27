@@ -7,9 +7,7 @@ const URL =
   'https://api.open-meteo.com/v1/forecast?daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,apparent_temperature_max,uv_index_max&current_weather=true&timeformat=unixtime'
 
 const citiesSection = document.querySelector('#cities-block')
-console.log('Before innerHTML')
 citiesSection.innerHTML = ''
-console.log('After innerHTML')
 
 const timeRuFormatter = new Intl.DateTimeFormat(undefined, {
   timeStyle: 'short',

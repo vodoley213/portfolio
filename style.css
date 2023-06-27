@@ -74,6 +74,7 @@ min-width: 1069 (67em = 1072px) H2: 65px; H3: 48px; p: 21px; line-height: 1.38; 
   --size-200: 0.5rem;
   --size-300: 0.75rem;
   --size-400: 1rem;
+  --size-450: 1.3rem;
   --size-500: 1.5rem;
   --size-600: 2rem;
   --size-700: 3rem;
@@ -400,8 +401,8 @@ button a:hover {
   color: var(--color-text-white);
 }
 
-button:hover,
-button:focus-visible {
+button:hover:not(.mobile-nav-toggle),
+button:focus-visible:not(.mobile-nav-toggle) {
   background-color: var(--color-outline-on-dark);
   border: 2px solid var(--color-outline-on-dark);
 }
@@ -518,7 +519,7 @@ button:focus-visible {
 
 .mobile-nav-toggle {
   display: none;
-  z-index: 10;
+  /* z-index: 10; */
 }
 
 .nav-list {
@@ -531,11 +532,6 @@ button:focus-visible {
 .nav-list a {
   text-decoration: none;
 }
-
-/* a {
-  color: var(--color-text-white);
-  text-decoration: none;
-} */
 
 .nav-list a:hover::before,
 .nav-list a:focus-visible::before {
@@ -569,7 +565,6 @@ button:focus-visible {
 
 @media (max-width: 46em) {
   .primary-navigation {
-    /* display: none; */
     position: fixed;
     top: 0;
     left: 0;

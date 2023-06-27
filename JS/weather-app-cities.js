@@ -160,3 +160,6 @@ export const CITIES_SET = new Map([
     },
   ],
 ])
+
+export const allCityesArray = []
+for (let i = 0; i < CITIES_SET.size; i++) allCityesArray[i] = i

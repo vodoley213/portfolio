@@ -166,3 +166,104 @@
   /* justify-content: start; */
   align-items: center;
 }
+
+.x-close {
+  margin-left: auto;
+  font-size: var(--size-500);
+  cursor: pointer;
+}
+.x-close:hover,
+.x-close:focus-visible {
+  color: var(--color-main-accent);
+}
+
+/* ----- Cities navigation ----- */
+.cities-list {
+  /* display: flex; */
+  gap: var(--size-400);
+  color: var(--color-text-white);
+  font-weight: var(--font-weight-bold);
+  /* font-size: var(--font-size-nav); */
+}
+
+/* .cities-list a {
+  text-decoration: none;
+} */
+
+/* a {
+  color: var(--color-text-white);
+  text-decoration: none;
+} */
+
+/* .cities-list:hover::before,
+.cities-list:focus-visible::before {
+  content: '';
+  position: absolute;
+  top: var(--size-700);
+  left: 0;
+  width: 100%;
+  height: var(--size-300);
+  background-color: var(--color-main-accent);
+} */
+
+.cities-navigation ul {
+  display: grid;
+}
+.cities-navigation ul li {
+  position: relative;
+  font-size: var(--size-450);
+}
+
+.cities-navigation ul li:hover::after,
+.cities-navigation ul li:focus-visible::after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--size-200));
+  left: calc(-1 * var(--size-500));
+  width: 138%;
+  height: var(--size-700);
+  background-color: var(--color-outline-on-dark);
+  z-index: -1;
+}
+
+.cities-navigation ul li:hover,
+.cities-navigation ul li:focus-visible {
+  cursor: pointer;
+}
+/* .cities-navigation ul li:hover::before,
+.cities-navigation ul li:focus-visible::before {
+  content: '';
+  position: absolute;
+  top: var(--size-700);
+  left: 0;
+  width: 100%;
+  height: var(--size-300);
+  background-color: var(--color-main-accent);
+} */
+@media (min-width: 46em), (min-width: 67em) {
+  .cities-navigation ul li {
+    font-size: var(--size-450);
+  }
+}
+.cities-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  height: 100dvh;
+  padding: var(--size-700) var(--size-900) var(--size-500) var(--size-500);
+  background-color: var(--color-main-body);
+  transform: translateX(-100%);
+  transition: 350ms;
+}
+
+.cities-navigation[data-visible] {
+  transform: translateX(0);
+}
+
+.primary-header[data-overlay]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgb(0, 0, 0, 0.6);
+}

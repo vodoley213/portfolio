@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
 
-    <script defer src="script.js"></script>
+    <script type="module" src="script.js"></script>
     <script type="module" src="JS/weather-app.js"></script>
 
     <link rel="stylesheet" href="style.css" />
@@ -34,13 +34,12 @@
             aria-controls="primary-navigation"
             aria-expanded="false"
           >
-            <!-- TODO: Разобраться с svg во внешнем файле и поправить ссылки на svg -->
             <svg class="icon-hamburger" aria-hidden="true">
               <use href="#icon-hamburger"></use>
             </svg>
-            <svg class="icon-close hide" aria-hidden="true">
+            <!-- <svg class="icon-close hide" aria-hidden="true">
               <use href="#icon-close"></use>
-            </svg>
+            </svg> -->
             <span class="visually-hidden">Menu</span>
           </button>
           <nav class="primary-navigation" id="primary-navigation">
@@ -70,11 +69,18 @@
         </div>
       </div>
     </header>
-
+    <nav class="cities-navigation" id="cities-navigation">
+      <ul
+        aria-label="Cities"
+        role="list"
+        class="cities-list"
+        id="cities-list"
+      ></ul>
+    </nav>
     <main>
       <section>
         <div class="container line padding-1st-container">
-          <svg class="margin-bottom-600 add-city">
+          <svg data-add-city class="margin-bottom-600 add-city">
             <use href="#add-city"></use>
           </svg>
           <div id="cities-block" class="cities-block">
@@ -140,6 +146,7 @@
               <div class="city-location">
                 <img src="images/bx-current-location.svg" alt="" />
                 <h2 data-city-name class="fs-city"></h2>
+                <div id="x-close" class="x-close fw-bold">X</div>
               </div>
               <div class="temp-middle-row margin-top-400">
                 <div class="daily-temperatura">
@@ -184,8 +191,7 @@
               <div
                 data-current-day
                 class="text-white current-day margin-block-600 no-wrap"
-              >
-              </div>
+              ></div>
               <div id="daily-focast-section" class="temp-forcast"></div>
             </div>
           </template>
