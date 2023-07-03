@@ -7,7 +7,26 @@ const addCities = document.querySelector('[data-add-city]')
 
 const STORAGE_PREFIX = 'WEATHER_APP'
 const CITIES_STORAGE_KEY = `${STORAGE_PREFIX}-CITIES`
+const YOUR_DESTINATION_KEY = `${STORAGE_PREFIX}-YOU`
 const DEFAULT_CITIES = [0, 1, 2, 4]
+
+// localStorage.removeItem(CITIES_STORAGE_KEY)
+// localStorage.removeItem(YOUR_DESTINATION_KEY)
+
+if (localStorage.getItem(YOUR_DESTINATION_KEY) !== null) {
+  const youDestitationCoords = JSON.parse(
+    localStorage.getItem(YOUR_DESTINATION_KEY)
+  )
+  CITIES_SET.set(16, {
+    city: youDestitationCoords.city,
+    latitude: youDestitationCoords.latitude,
+    longitude: youDestitationCoords.longitude,
+    timezone: youDestitationCoords.timezone,
+    UTC: youDestitationCoords.UTC,
+  })
+
+  // console.log(CITIES_SET)
+}
 
 const citiesForRender = loadCitiesFromLS()
 
@@ -21,18 +40,33 @@ saveCitiesToLS()
 // ----- AddEventListeners -----
 
 addCities.addEventListener('click', () => {
-  // citiesNav.hasAttribute('data-visible')
-  //   ? citiesNav.setAttribute('aria-expanded', false)
-  //   : citiesNav.setAttribute('aria-expanded', true)
+  citiesNav.hasAttribute('data-visible')
+    ? citiesNav.setAttribute('aria-expanded', false)
+    : citiesNav.setAttribute('aria-expanded', true)
   citiesNav.dataset.visible = ''
   primaryHeader.dataset.overlay = ''
 })
 
 // Add cityCard to page
-citiesNav.addEventListener('click', e => {
+citiesNav.addEventListener('click', async e => {
   if (e.target.matches('[data-city-id-nav]')) {
     const cityId = +e.target.dataset.cityIdNav
     citiesForRender.push(cityId)
+
+    if (cityId === 16) {
+      try {
+        const result = await setYourLocation()
+        console.log('Что пришло из функции через return result: ', result)
+      } catch (error) {
+        console.log('Что пришло из функции через return result: ', error)
+      }
+    }
+
+    // setTimeout(() => {
+    // console.log('cityId: ', cityId)
+    // console.log(CITIES_SET.get(cityId))
+    // }, 1)
+
     renderCityCards([cityId])
     renderCitiesListForPopup()
     saveCitiesToLS()
@@ -50,6 +84,8 @@ document.addEventListener('click', e => {
     const indexOfcityForClose = citiesForRender.indexOf(cityCardForCloseId)
     citiesForRender.splice(indexOfcityForClose, 1)
 
+    if (cityCardForCloseId === 16) localStorage.removeItem(YOUR_DESTINATION_KEY)
+
     cityCardForClose.remove()
     renderCitiesListForPopup()
     saveCitiesToLS()
@@ -62,10 +98,52 @@ document.addEventListener('click', e => {
   }
 })
 
-if ('geolocation' in navigator) {
-  console.log(/* местоположение доступно */)
-} else {
-  console.log(/* местоположение НЕ доступно */)
+function setYourLocation() {
+  return new Promise((resolve, reject) => {
+    function geo_success(position) {
+      const { latitude, longitude } = position.coords
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      const UTC = new Date().getTimezoneOffset() / -60
+
+      CITIES_SET.set(16, {
+        city: 'Моё местонахождение',
+        latitude: String(latitude.toFixed(2)),
+        longitude: String(longitude.toFixed(2)),
+        timezone: timezone,
+        UTC: UTC,
+      })
+
+      localStorage.setItem(
+        YOUR_DESTINATION_KEY,
+        JSON.stringify(CITIES_SET.get(16))
+      )
+
+      // console.log(CITIES_SET.get(15))
+      // console.log(CITIES_SET.get(16))
+      // isGeoAvailable = true
+    }
+
+    function geo_error() {
+      console.log('Данные о местоположении недоступны')
+      // isGeoAvailable = false
+    }
+
+    const geo_options = {
+      enableHighAccuracy: true,
+      maximumAge: 3600000,
+      timeout: 720000,
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      geo_success,
+      geo_error,
+      geo_options
+    )
+    setTimeout(() => {
+      resolve(true)
+    }, 10000)
+    // reject(false)
+  })
 }
 
 // --- Additional functions ---
@@ -89,7 +167,17 @@ function renderCitiesListForPopup() {
     li.dataset.cityIdNav = cityID
     ul.appendChild(li)
   })
-  const li = document.createElement('li')
-  li.innerText = 'Моё местонахождение'
-  ul.appendChild(li)
+  // const li = document.createElement('li')
+  // li.innerText = 'Моё местонахождение'
+  // li.dataset.cityIdNav = 16
+  // ul.appendChild(li)
 }
+
+// function citiesSet16() {
+//   CITIES_SET.set(16, {
+//     latitude: String(latitude.toFixed(2)),
+//     longitude: String(longitude.toFixed(2)),
+//     timezone: timezone,
+//     UTC: UTC,
+//   })
+// }

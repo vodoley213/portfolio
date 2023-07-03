@@ -159,6 +159,12 @@ export const CITIES_SET = new Map([
       UTC: 5,
     },
   ],
+  [
+    16,
+    {
+      city: 'Моё местонахождение',
+    },
+  ],
 ])
 
 export const allCityesArray = []
