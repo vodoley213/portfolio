@@ -10,8 +10,8 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
 
-    <script type="module" src="script.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js?2"></script>
+    <link rel="stylesheet" href="style.css?2" />
     <title>Portfolio Website</title>
   </head>
   <body>
@@ -346,14 +346,13 @@
                       />
                     </div>
                     <h3 class="fs-portfolio">Прогноз погоды (JS)</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Blanditiis consequuntur eum, adipisci at saepe incidunt.
+                    <p class="text-body">
+                      Приложение сделано с использованием CSS grid, адаптивный дизайн, CSS-переменные. По JavaScript использовано: модули, HTML-шаблоны (template), Fetch API, Object Destructuring, Async/await, LocalStorage, Map...
                     </p>
                   </div>
                 </a>
 
-                <button class="fw-bold text-white">Смотреть код</button>
+                <button class="fw-bold text-white"><a href="weather-app.html">Смотреть код</a></button>
               </div>
               <div>
                 <div class="card">
@@ -428,12 +427,12 @@
                   <h3 class="fs-portfolio">Этот сайт-портфолио</h3>
                   <p>
                     При создании использовались CSS Flexbox, CSS Grid,
-                    медиа-запросы, адаптивный дизайн, Mobile first,
+                    медиа-запросы, адаптивный дизайн, Mobile first, адаптивные картинки,
                     CSS-переменные, @font-face, IntersectionObserver и прочее.
                     Ниже - ссылки на исходные коды.
                   </p>
                 </div>
-                <div class="tree-buttons">
+                <div class="buttons-in-row">
                   <button class="fw-bold text-white">HTML код</button>
                   <button class="fw-bold text-white">
                     <a href="code-site-css.html">CSS код</a>
@@ -511,7 +510,7 @@
         <!-- Contacts section -->
         <section class="">
           <div class="container line padding-block-container">
-            <a><h2 class="fs-big-heading">Контакты</h2></a>
+            <a><h2 id="contacts" class="fs-big-heading">Контакты</h2></a>
             <h3
               class="padding-block-600 text-center text-accent fs-medium-heading"
             >

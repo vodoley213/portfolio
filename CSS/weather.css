@@ -25,6 +25,12 @@
   white-space: nowrap;
 }
 
+.wrap {
+flex-wrap: wrap;
+}
+.wrap > button {
+  margin: 0;
+}
 /* card-weather */
 
 .cities-block {
@@ -177,6 +183,32 @@
   color: var(--color-main-accent);
 }
 
+.no-geo-coordinates {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 45%;
+  height: calc(1.5 * var(--size-900));
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: var(--size-300);
+  visibility: hidden;
+}
+.no-geo-coordinates[data-no-geo-coordinates] {
+  visibility: visible;
+  animation: no-geo-animation 3000ms ease-in-out;
+}
+
+@keyframes no-geo-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* ----- Cities navigation ----- */
 .cities-list {
   /* display: flex; */
@@ -267,3 +299,8 @@
   inset: 0;
   background: rgb(0, 0, 0, 0.6);
 }
+
+/* ----- TEMP ------ */
+/* .border-line {
+  border: 2px dashed firebrick;
+} */

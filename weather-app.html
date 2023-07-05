@@ -10,11 +10,11 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
 
-    <script type="module" src="script.js"></script>
-    <script type="module" src="JS/weather-app.js"></script>
+    <script type="module" src="script.js?2"></script>
+    <script type="module" src="JS/weather-app.js?2"></script>
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="CSS/weather.css" />
+    <link rel="stylesheet" href="style.css?2" />
+    <link rel="stylesheet" href="CSS/weather.css?2" />
     <title>Portfolio Website</title>
   </head>
   <body>
@@ -50,19 +50,19 @@
               </li>
               <li>
                 <svg class="nav-icons"><use href="#menu-about"></use></svg>
-                <a href="#about">Обо мне</a>
+                <a href="index.html#about">Обо мне</a>
               </li>
               <li>
                 <svg class="nav-icons"><use href="#menu-portfolio"></use></svg>
-                <a href="#portfolio">Портфолио</a>
+                <a href="index.html#portfolio">Портфолио</a>
               </li>
               <li>
                 <svg class="nav-icons"><use href="#menu-blog"></use></svg>
-                <a href="#blog">Блог</a>
+                <a href="./index.html#blog">Блог</a>
               </li>
               <li>
                 <svg class="nav-icons"><use href="#menu-contacts"></use></svg>
-                <a href="#contacts">Контакты</a>
+                <a href="./index.html#contacts">Контакты</a>
               </li>
             </ul>
           </nav>
@@ -78,6 +78,27 @@
       ></ul>
     </nav>
     <main>
+      <section>
+        <div class="container line padding-1st-container">
+          <p>
+            Погодное приложение сделано с использованием CSS grid, CSS flex,
+            медиа-запросы, адаптивный дизайн, Mobile first, CSS-переменные,
+            @font-face. По
+            <span class="text-accent">JavaScript</span> использовано: модули,
+            работа с HTML-шаблонами (template), работа с API, Object
+            Destructuring, Промисы (async, await), LocalStorage, Map и другое.
+          </p>
+          <p>Коды JavaScript:</p>
+          <div class="buttons-in-row fs-footer wrap margin-top-400">
+            <button class="fw-bold text-white"><a href="HTML/code-weather-app.html">weather-app.js</a></button>
+            <button class="fw-bold text-white"><a href="HTML/code-parsing-weather-API.html">parsing-weather-API.js</a></button>
+            <button class="fw-bold text-white"><a href="HTML/code-weather-app-render-card.html">weather-app-render-card.js</a></button>
+            <button class="fw-bold text-white"><a href="HTML/code-weather-app-cities.html">weather-app-cities.js</a></button>
+            <button class="fw-bold text-white"><a href="HTML/code-weather-app-icons.html">weather-app-icons.js</a></button>
+            <button class="fw-bold text-white"><a href="https://github.com/vodoley213">GitHub</a></button>
+          </div>
+        </div>
+      </section>
       <section>
         <div class="container line padding-1st-container">
           <svg data-add-city class="margin-bottom-600 add-city">
@@ -138,6 +159,9 @@
 
               </div>
             </div> -->
+          </div>
+          <div class="no-geo-coordinates fs-medium-heading">
+            Геоданные недоступны
           </div>
 
           <!-- Шаблон погодной карты городов -->
@@ -224,8 +248,8 @@
                 <li><a href="index.html#about">Обо мне</a></li>
                 <!-- <li><a href="#resume">Резюме</a></li> -->
                 <li><a href="index.html#portfolio">Портфолио</a></li>
-                <li><a href="index.html##blog">Мой блог</a></li>
-                <li><a href="index.html##contacts">Контакты</a></li>
+                <li><a href="index.html#blog">Мой блог</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
               </ul>
             </nav>
           </div>

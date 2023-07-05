@@ -24,8 +24,6 @@ if (localStorage.getItem(YOUR_DESTINATION_KEY) !== null) {
     timezone: youDestitationCoords.timezone,
     UTC: youDestitationCoords.UTC,
   })
-
-  // console.log(CITIES_SET)
 }
 
 const citiesForRender = loadCitiesFromLS()
@@ -59,13 +57,14 @@ citiesNav.addEventListener('click', async e => {
         console.log('Что пришло из функции через return result: ', result)
       } catch (error) {
         console.log('Что пришло из функции через return result: ', error)
+        citiesForRender.pop()
+        const noGeoCoorsDiv = document.querySelector('.no-geo-coordinates')
+        noGeoCoorsDiv.dataset.noGeoCoordinates = ''
+        setTimeout(() => {
+          noGeoCoorsDiv.removeAttribute('data-no-geo-coordinates')
+        }, 2900)
       }
     }
-
-    // setTimeout(() => {
-    // console.log('cityId: ', cityId)
-    // console.log(CITIES_SET.get(cityId))
-    // }, 1)
 
     renderCityCards([cityId])
     renderCitiesListForPopup()
@@ -78,6 +77,7 @@ citiesNav.addEventListener('click', async e => {
 
 // Remove cityCard from page
 document.addEventListener('click', e => {
+  console.log('Куда я кликнул: ', e.target)
   if (e.target.matches('#x-close')) {
     const cityCardForClose = e.target.closest('.card-weather')
     const cityCardForCloseId = +cityCardForClose.dataset.cityId
@@ -117,15 +117,12 @@ function setYourLocation() {
         YOUR_DESTINATION_KEY,
         JSON.stringify(CITIES_SET.get(16))
       )
-
-      // console.log(CITIES_SET.get(15))
-      // console.log(CITIES_SET.get(16))
-      // isGeoAvailable = true
+      resolve(true)
     }
 
     function geo_error() {
+      reject(false)
       console.log('Данные о местоположении недоступны')
-      // isGeoAvailable = false
     }
 
     const geo_options = {
@@ -139,10 +136,6 @@ function setYourLocation() {
       geo_error,
       geo_options
     )
-    setTimeout(() => {
-      resolve(true)
-    }, 10000)
-    // reject(false)
   })
 }
 

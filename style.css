@@ -196,6 +196,10 @@ svg {
   color: var(--color-text-white);
 }
 
+.text-body {
+  color: var(--color-text-body);
+}
+
 .fs-big-heading {
   font-size: var(--font-size-big);
 }
@@ -780,7 +784,7 @@ button:focus-visible:not(.mobile-nav-toggle) {
   grid-column: span 2;
 } */
 
-.tree-buttons {
+.buttons-in-row {
   display: flex;
   gap: var(--size-400);
 }
