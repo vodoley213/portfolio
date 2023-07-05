@@ -1,6 +1,6 @@
 import { renderCityCards } from './weather-app-render-card.js'
 import { CITIES_SET, allCityesArray } from './weather-app-cities.js'
-import { primaryHeader } from '../script.js'
+import { primaryHeader,iconHamburger } from '../script.js'
 
 export const citiesNav = document.querySelector('#cities-navigation')
 const addCities = document.querySelector('[data-add-city]')
@@ -43,6 +43,7 @@ addCities.addEventListener('click', () => {
     : citiesNav.setAttribute('aria-expanded', true)
   citiesNav.dataset.visible = ''
   primaryHeader.dataset.overlay = ''
+  iconHamburger.classList.add('hide')
 })
 
 // Add cityCard to page

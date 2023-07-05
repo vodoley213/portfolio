@@ -1,7 +1,7 @@
 export const primaryHeader = document.querySelector('.primary-header')
 const navToggle = document.querySelector('.mobile-nav-toggle')
 const primaryNav = document.querySelector('.primary-navigation')
-const iconHamburger = document.querySelector('.icon-hamburger')
+export const iconHamburger = document.querySelector('.icon-hamburger')
 
 const backButton = document.querySelector('.button-arrow')
 const scrollWatcher = document.createElement('div')

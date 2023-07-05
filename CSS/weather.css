@@ -25,12 +25,12 @@
   white-space: nowrap;
 }
 
-.wrap {
+/* .wrap {
 flex-wrap: wrap;
-}
-.wrap > button {
+} */
+/* .wrap > button {
   margin: 0;
-}
+} */
 /* card-weather */
 
 .cities-block {
