@@ -1,9 +1,7 @@
 import { primaryHeader, iconHamburger } from '../script.js'
-import {
-  SNAKE_SPEED,
-  updateSnake,
-  drawSnake,
-} from './snake-app-snake.js'
+import { SNAKE_SPEED, updateSnake, drawSnake } from './snake-app-snake.js'
+
+import { updateMouse, drawMouse } from './snake-app-mouse.js'
 
 const snakeField = document.querySelector('#snake-field')
 
@@ -30,12 +28,9 @@ function updateGame(currentTime) {
   if (deltaInSeconds < 1 / SNAKE_SPEED) return
 
   lastTime = currentTime
-  // console.log(deltaInSeconds)
 
-  updateSnake()
-  // console.log('Сразу после апдейта:')
-  // console.log(snakeBody)
-  drawSnake(snakeField)
+  updateAll()
+  drawAll()
 }
 
 window.requestAnimationFrame(updateGame)
@@ -51,4 +46,15 @@ function SwitchToNormalModeScreen() {
   iconHamburger.classList.remove('hide')
   primaryHeader.removeAttribute('data-fullscreen-mode')
   snakeField.classList.remove('fullscreen')
+}
+
+function updateAll() {
+  updateSnake()
+  updateMouse()
+}
+
+function drawAll() {
+  snakeField.innerHTML = ''
+  drawSnake(snakeField)
+  drawMouse(snakeField)
 }

@@ -6,10 +6,12 @@ const fieldSize = getComputedStyle(field).getPropertyValue('--field-size')
 const snakeBody = [
   { x: Math.round(fieldSize / 2), y: Math.round(fieldSize / 2) },
 ]
+let newSnakeParts = 0
 
 // console.log(FIELD_SIZE)
 
 export function updateSnake() {
+  addSnakeParts()
   const snakeDirection = getSnakeDirection()
   let newX = snakeBody[0].x + snakeDirection.x
   let newY = snakeBody[0].y + snakeDirection.y
@@ -24,10 +26,19 @@ export function updateSnake() {
 }
 
 export function drawSnake(snakeField) {
-  snakeField.innerHTML = ''
   snakeBody.forEach((segment, index) =>
     appendSnakePart(segment, index, snakeField)
   )
+}
+
+export function snakeGrowth(amount) {
+  newSnakeParts += amount
+}
+
+export function eated(mouse) {
+  return snakeBody.some(snakePart => {
+    return comparePositions(snakePart, mouse)
+  })
 }
 
 // --- Additional functions ---
@@ -42,4 +53,15 @@ function appendSnakePart(segment, index, snakeField) {
     snakePart.classList.add('snake')
   }
   snakeField.append(snakePart)
+}
+
+function comparePositions(snakePart, mouse) {
+  return snakePart.x === mouse.x && snakePart.y === mouse.y
+}
+
+function addSnakeParts() {
+  for (let i = 0; i < newSnakeParts; i++) {
+    snakeBody.push({ ...snakeBody[snakeBody.length - 1] })
+  }
+  newSnakeParts = 0
 }
