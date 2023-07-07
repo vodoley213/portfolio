@@ -90,8 +90,10 @@
 }
 
 .mouse {
+  /* background-image: url(../images/svg/mouse.svg); */
   background-color: orangered;
-  border: 0.25vmin solid var(--color-main-body);
+  border-radius: 40%;
+  border: 0.25vmin solid hsl(13, 99%, 15%);
 }
 
 .score {

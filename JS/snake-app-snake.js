@@ -1,8 +1,8 @@
 import { getSnakeDirection } from './snake-app-input.js'
-export const SNAKE_SPEED = 1 /* how many moves per second*/
+export const SNAKE_SPEED = 2 /* how many moves per second*/
 
 const field = document.querySelector('#snake-field')
-const fieldSize = getComputedStyle(field).getPropertyValue('--field-size')
+export const fieldSize = getComputedStyle(field).getPropertyValue('--field-size')
 const snakeBody = [
   { x: Math.round(fieldSize / 2), y: Math.round(fieldSize / 2) },
 ]
@@ -35,7 +35,7 @@ export function snakeGrowth(amount) {
   newSnakeParts += amount
 }
 
-export function eated(mouse) {
+export function eatedOrOnSnake(mouse) {
   return snakeBody.some(snakePart => {
     return comparePositions(snakePart, mouse)
   })

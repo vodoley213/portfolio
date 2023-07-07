@@ -1,12 +1,12 @@
-import { snakeGrowth, eated } from './snake-app-snake.js'
+import { snakeGrowth, eatedOrOnSnake, fieldSize } from './snake-app-snake.js'
 
-let mouse = { x: 2, y: 1 }
+let mouse = randommousePosition()
 const GROWS_RATE = 1
 
 export function updateMouse() {
-  if (eated(mouse)) {
+  if (eatedOrOnSnake(mouse)) {
     snakeGrowth(GROWS_RATE)
-    mouse = { x: 20, y: 10 }
+    mouse = randommousePosition()
   }
 }
 
@@ -17,4 +17,19 @@ export function drawMouse(snakeField) {
   mouseElement.classList.add('mouse')
 
   snakeField.append(mouseElement)
+}
+
+function randommousePosition() {
+  let newMousePosition
+  while (newMousePosition == null || eatedOrOnSnake(newMousePosition)) {
+    newMousePosition = randimPositionOnField()
+  }
+  return newMousePosition
+}
+
+function randimPositionOnField() {
+  return {
+    x: Math.floor(Math.random() * fieldSize) + 1,
+    y: Math.floor(Math.random() * fieldSize) + 1,
+  }
 }

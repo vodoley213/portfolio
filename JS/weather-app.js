@@ -107,7 +107,7 @@ function setYourLocation() {
       const UTC = new Date().getTimezoneOffset() / -60
 
       CITIES_SET.set(16, {
-        city: 'Моё местонахождение',
+        city: 'Моё место',
         latitude: String(latitude.toFixed(2)),
         longitude: String(longitude.toFixed(2)),
         timezone: timezone,
@@ -162,7 +162,7 @@ function renderCitiesListForPopup() {
     ul.appendChild(li)
   })
   // const li = document.createElement('li')
-  // li.innerText = 'Моё местонахождение'
+  // li.innerText = 'Моё место'
   // li.dataset.cityIdNav = 16
   // ul.appendChild(li)
 }

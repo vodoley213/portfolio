@@ -162,7 +162,7 @@ export const CITIES_SET = new Map([
   [
     16,
     {
-      city: 'Моё местонахождение',
+      city: 'Моё место',
     },
   ],
 ])
