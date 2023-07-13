@@ -41,7 +41,16 @@
 .snake-head-up,
 .snake-head-right,
 .snake-head-down,
-.snake-head-left {
+.snake-head-left,
+.snake-body-N,
+.snake-body-UL,
+.snake-body-UR,
+.snake-body-BR,
+.snake-body-BL,
+.tail-right,
+.tail-left,
+.tail-up,
+.tail-down {
   background-color: hsl(86, 53%, 51%);
   border: 0.25vmin solid hsl(87, 39%, 28%);
 }
@@ -89,11 +98,43 @@
   color: var(--color-main-body);
 }
 
+.snake-body-UL {
+  border-radius: 100% 0 0 0;
+}
+
+.snake-body-UR {
+  border-radius: 0 100% 0 0;
+}
+
+.snake-body-BR {
+  border-radius: 0 0 100% 0;
+}
+
+.snake-body-BL {
+  border-radius: 0 0 0 100%;
+}
+
+.tail-right {
+  border-radius: 0% 100% 100% 0% / 0% 50% 50% 100%;
+}
+
+.tail-left {
+  border-radius: 100% 0% 0% 100% / 50% 100% 0% 50%;
+}
+
+.tail-up {
+  border-radius: 50% 50% 100% 0% / 100% 100% 0% 0%;
+}
+
+.tail-down {
+  border-radius: 0% 100% 50% 50% / 0% 0% 100% 100%;
+}
+
 .mouse {
-  /* background-image: url(../images/svg/mouse.svg); */
-  background-color: orangered;
+  background-image: url(../images/svg/mouse.svg);
+  /* background-color: orangered;
   border-radius: 40%;
-  border: 0.25vmin solid hsl(13, 99%, 15%);
+  border: 0.25vmin solid hsl(13, 99%, 15%); */
 }
 
 .score {

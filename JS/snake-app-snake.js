@@ -2,27 +2,33 @@ import { getSnakeDirection } from './snake-app-input.js'
 export const SNAKE_SPEED = 2 /* how many moves per second*/
 
 const field = document.querySelector('#snake-field')
-export const fieldSize = getComputedStyle(field).getPropertyValue('--field-size')
+export const fieldSize =
+  getComputedStyle(field).getPropertyValue('--field-size')
 const snakeBody = [
-  { x: Math.round(fieldSize / 2), y: Math.round(fieldSize / 2) },
+  {
+    x: Math.round(fieldSize / 2),
+    y: Math.round(fieldSize / 2),
+  },
 ]
 let newSnakeParts = 0
-
-// console.log(FIELD_SIZE)
 
 export function updateSnake() {
   addSnakeParts()
   const snakeDirection = getSnakeDirection()
+  const headDirection = snakeDirection.head
   let newX = snakeBody[0].x + snakeDirection.x
   let newY = snakeBody[0].y + snakeDirection.y
-  console.log(fieldSize)
+
   if (newX === 0) newX = +fieldSize
   if (newX === +fieldSize + 1) newX = 1
   if (newY === 0) newY = +fieldSize
   if (newY === +fieldSize + 1) newY = 1
-  const newSnakeHead = { x: newX, y: newY }
+  const newSnakeHead = { x: newX, y: newY, head: headDirection }
   snakeBody.unshift(newSnakeHead)
   snakeBody.pop()
+
+  getSnakeShape(snakeBody)
+  console.table(snakeBody)
 }
 
 export function drawSnake(snakeField) {
@@ -46,13 +52,141 @@ function appendSnakePart(segment, index, snakeField) {
   const snakePart = document.createElement('div')
   snakePart.style.gridColumnStart = segment.x
   snakePart.style.gridRowStart = segment.y
-  const headDirection = getSnakeDirection().head
-  if (index === 0) {
-    snakePart.classList.add(`snake-head-${headDirection}`)
-  } else {
-    snakePart.classList.add('snake')
-  }
+  const shape = segment.shape
+  snakePart.classList.add(shape)
   snakeField.append(snakePart)
+}
+
+function getSnakeShape(snakeBody) {
+  snakeBody[0].shape = snakeBody[0].head
+  const snakeLength = snakeBody.length
+
+  if (snakeLength === 1) return
+
+  // --- Форма хвоста: ---
+  if (snakeBody[snakeLength - 1].x > snakeBody[snakeLength - 2].x)
+    snakeBody[snakeLength - 1].shape = 'tail-right'
+
+  if (snakeBody[snakeLength - 1].x < snakeBody[snakeLength - 2].x)
+    snakeBody[snakeLength - 1].shape = 'tail-left'
+
+  if (snakeBody[snakeLength - 1].y > snakeBody[snakeLength - 2].y)
+    snakeBody[snakeLength - 1].shape = 'tail-down'
+
+      if (snakeBody[snakeLength - 1].y < snakeBody[snakeLength - 2].y)
+        snakeBody[snakeLength - 1].shape = 'tail-up'
+
+  if (snakeLength === 2) return
+
+  // --- Форма тела: ---
+  for (let segment = 1; segment < snakeLength - 1; segment++) {
+    // если x(i-1) = x(i) = x(i+1) или y(i-1) = yi = y(i+1), то второй элемент – N;
+    if (
+      snakeBody[segment - 1].x === snakeBody[segment].x &&
+      snakeBody[segment].x === snakeBody[segment + 1].x
+    ) {
+      snakeBody[segment].shape = 'snake-body-N'
+      return
+    }
+    if (
+      snakeBody[segment - 1].y === snakeBody[segment].y &&
+      snakeBody[segment].y === snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-N'
+      return
+    }
+
+    // если x(i-1) = xi и y(i-1) > yi и xi < x(i+1) и yi = y(i+1), то второй элемент – UL;
+    if (
+      snakeBody[segment - 1].x === snakeBody[segment].x &&
+      snakeBody[segment - 1].y > snakeBody[segment].y &&
+      snakeBody[segment].x < snakeBody[segment + 1].x &&
+      snakeBody[segment].y === snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-UL'
+      return
+    }
+
+    // если x(i-1) > xi и y(i-1) = yi и xi = x(i+1) и yi < y(i+1), то второй элемент – UL;
+    if (
+      snakeBody[segment - 1].x > snakeBody[segment].x &&
+      snakeBody[segment - 1].y === snakeBody[segment].y &&
+      snakeBody[segment].x === snakeBody[segment + 1].x &&
+      snakeBody[segment].y < snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-UL'
+      return
+    }
+
+    // если x(i-1) < xi и y(i-1) = yi и xi = x(i+1) и yi < y(i+1), то второй элемент – UR;
+    if (
+      snakeBody[segment - 1].x < snakeBody[segment].x &&
+      snakeBody[segment - 1].y === snakeBody[segment].y &&
+      snakeBody[segment].x === snakeBody[segment + 1].x &&
+      snakeBody[segment].y < snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-UR'
+      return
+    }
+
+    // если x(i-1) = xi и y(i-1) > yi и xi > x(i+1) и yi = y(i+2), то второй элемент – UR;
+    if (
+      snakeBody[segment - 1].x === snakeBody[segment].x &&
+      snakeBody[segment - 1].y > snakeBody[segment].y &&
+      snakeBody[segment].x > snakeBody[segment + 1].x &&
+      snakeBody[segment].y === snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-UR'
+      return
+    }
+
+    // если x(i-1) < xi и y(i-1) = yi и xi = x(i+1) и yi > y(i+1), то второй элемент – BR;
+    if (
+      snakeBody[segment - 1].x < snakeBody[segment].x &&
+      snakeBody[segment - 1].y === snakeBody[segment].y &&
+      snakeBody[segment].x === snakeBody[segment + 1].x &&
+      snakeBody[segment].y > snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-BR'
+      return
+    }
+
+    // если x(i-1) = xi и y(i-1) < yi и xi > x(i+1) и yi = y(i+1), то второй элемент – BR;
+    if (
+      snakeBody[segment - 1].x === snakeBody[segment].x &&
+      snakeBody[segment - 1].y < snakeBody[segment].y &&
+      snakeBody[segment].x > snakeBody[segment + 1].x &&
+      snakeBody[segment].y === snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-BR'
+      return
+    }
+
+    // если x(i-1) = xi и y(i-1) < yi и xi < x(i+1) и yi = y(i+1), то второй элемент – BL;
+    if (
+      snakeBody[segment - 1].x === snakeBody[segment].x &&
+      snakeBody[segment - 1].y < snakeBody[segment].y &&
+      snakeBody[segment].x < snakeBody[segment + 1].x &&
+      snakeBody[segment].y === snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-BL'
+      return
+    }
+
+    // если x(i-1) > xi и y(i-1) = yi и xi = x(i+1) и yi > y(i+1), то второй элемент – BL;
+    if (
+      snakeBody[segment - 1].x > snakeBody[segment].x &&
+      snakeBody[segment - 1].y === snakeBody[segment].y &&
+      snakeBody[segment].x === snakeBody[segment + 1].x &&
+      snakeBody[segment].y > snakeBody[segment + 1].y
+    ) {
+      snakeBody[segment].shape = 'snake-body-BL'
+      return
+    }
+    snakeBody[segment].shape = 'snake-body-N'
+  }
+
+  console.table(snakeBody)
 }
 
 function comparePositions(snakePart, mouse) {
