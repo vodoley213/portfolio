@@ -1,5 +1,13 @@
 import { primaryHeader, iconHamburger } from '../script.js'
-import { SNAKE_SPEED, updateSnake, drawSnake } from './snake-app-snake.js'
+import {
+  SNAKE_SPEED,
+  updateSnake,
+  drawSnake,
+  snakeIntersection,
+  brownSnake,
+  snakeBody,
+  fieldSize,
+} from './snake-app-snake.js'
 
 import { updateMouse, drawMouse } from './snake-app-mouse.js'
 
@@ -18,10 +26,19 @@ document.addEventListener('click', e => {
 // -- Main game loop --
 
 let lastTime = 0
+let gameOver = false
 
 drawSnake(snakeField)
 
-function updateGame(currentTime) {
+async function updateGame(currentTime) {
+  if (gameOver) {
+    const gameOverPoster = document.querySelector('.game-over-poster')
+    console.log(gameOverPoster)
+    gameOverPoster.classList.add('game-over-display')
+    brownSnake(snakeField)
+    await resetGame(gameOverPoster)
+  }
+
   window.requestAnimationFrame(updateGame)
 
   const deltaInSeconds = (currentTime - lastTime) / 1000
@@ -31,6 +48,7 @@ function updateGame(currentTime) {
 
   updateAll()
   drawAll()
+  checkForLoss()
 }
 
 window.requestAnimationFrame(updateGame)
@@ -57,4 +75,28 @@ function drawAll() {
   snakeField.innerHTML = ''
   drawSnake(snakeField)
   drawMouse(snakeField)
+}
+
+function checkForLoss() {
+  gameOver = snakeIntersection()
+}
+
+function resetGame(gameOverPoster) {
+  return new Promise((resolve, reject) => {
+    document.addEventListener(
+      'keydown',
+      () => {
+        gameOverPoster.classList.remove('game-over-display')
+        snakeBody.splice(0, snakeBody.length)
+        snakeBody[0] = {
+          x: Math.round(fieldSize / 2),
+          y: Math.round(fieldSize / 2),
+        }
+        gameOver = false
+        drawAll()
+        resolve(true)
+      },
+      { once: true }
+    )
+  })
 }

@@ -23,7 +23,7 @@
 }
 
 :root {
-  --field-size: 25;
+  --field-size: 21;
 }
 
 .snake-field {
@@ -37,6 +37,24 @@
   outline: 1vmin solid hsl(30, 49%, 20%);
   /* background-color: hsl(12, 78%, 18%); */
 }
+
+.game-over-poster {
+  display: none;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: var(--size-600);
+  width: max-content;
+  height: min-content;
+  background-color: hsl(30, 49%, 20%);
+  opacity: 0.7;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem 0.75rem rgba(0, 0, 0, 0.2);
+}
+.game-over-display {
+  display: block;
+}
+
 .snake,
 .snake-head-up,
 .snake-head-right,
@@ -53,6 +71,11 @@
 .tail-down {
   background-color: hsl(86, 53%, 51%);
   border: 0.25vmin solid hsl(87, 39%, 28%);
+}
+
+.brown-snake {
+  background-color: hsl(30, 49%, 20%);
+  border: 0.25vmin solid hsl(30, 49%, 38%);
 }
 
 .snake-head-up,

@@ -8,8 +8,6 @@ let lastSnakeDirection = {
   y: 0,
   head: 'snake-head-right',
 }
-let afterHead
-
 window.addEventListener('keydown', e => {
   switch (e.key) {
     case 'ArrowUp':

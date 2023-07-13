@@ -1,10 +1,12 @@
 import { getSnakeDirection } from './snake-app-input.js'
-export const SNAKE_SPEED = 2 /* how many moves per second*/
+export let SNAKE_SPEED = 4 /* how many moves per second*/
+
+snakeSpeedUpdate()
 
 const field = document.querySelector('#snake-field')
 export const fieldSize =
   getComputedStyle(field).getPropertyValue('--field-size')
-const snakeBody = [
+export const snakeBody = [
   {
     x: Math.round(fieldSize / 2),
     y: Math.round(fieldSize / 2),
@@ -28,32 +30,39 @@ export function updateSnake() {
   snakeBody.pop()
 
   getSnakeShape(snakeBody)
-  console.table(snakeBody)
 }
 
-export function drawSnake(snakeField) {
-  snakeBody.forEach((segment, index) =>
-    appendSnakePart(segment, index, snakeField)
-  )
+export function drawSnake(snakeField, { brownColor = false } = {}) {
+  snakeBody.forEach(segment => appendSnakePart(segment, snakeField, brownColor))
 }
 
 export function snakeGrowth(amount) {
   newSnakeParts += amount
 }
 
-export function eatedOrOnSnake(mouse) {
-  return snakeBody.some(snakePart => {
+export function eatedOrOnSnake(mouse, { ignoreHead = false } = {}) {
+  return snakeBody.some((snakePart, index) => {
+    if (ignoreHead && index === 0) return false
     return comparePositions(snakePart, mouse)
   })
 }
 
+export function snakeIntersection() {
+  return eatedOrOnSnake(snakeBody[0], { ignoreHead: true })
+}
+
+export function brownSnake(snakeField) {
+  drawSnake(snakeField, { brownColor: true })
+}
+
 // --- Additional functions ---
-function appendSnakePart(segment, index, snakeField) {
+function appendSnakePart(segment, snakeField, brownColor) {
   const snakePart = document.createElement('div')
   snakePart.style.gridColumnStart = segment.x
   snakePart.style.gridRowStart = segment.y
   const shape = segment.shape
   snakePart.classList.add(shape)
+  if (brownColor) snakePart.classList.add('brown-snake')
   snakeField.append(snakePart)
 }
 
@@ -73,8 +82,8 @@ function getSnakeShape(snakeBody) {
   if (snakeBody[snakeLength - 1].y > snakeBody[snakeLength - 2].y)
     snakeBody[snakeLength - 1].shape = 'tail-down'
 
-      if (snakeBody[snakeLength - 1].y < snakeBody[snakeLength - 2].y)
-        snakeBody[snakeLength - 1].shape = 'tail-up'
+  if (snakeBody[snakeLength - 1].y < snakeBody[snakeLength - 2].y)
+    snakeBody[snakeLength - 1].shape = 'tail-up'
 
   if (snakeLength === 2) return
 
@@ -198,4 +207,21 @@ function addSnakeParts() {
     snakeBody.push({ ...snakeBody[snakeBody.length - 1] })
   }
   newSnakeParts = 0
+}
+
+function snakeSpeedUpdate() {
+  document.addEventListener('keydown', e => {
+    switch (e.key) {
+      case '+':
+        SNAKE_SPEED += 0.1
+        console.log(SNAKE_SPEED)
+        break
+    }
+    switch (e.key) {
+      case '-':
+        SNAKE_SPEED -= 0.1
+        console.log(SNAKE_SPEED)
+        break
+    }
+  })
 }
