@@ -38,7 +38,8 @@
   /* background-color: hsl(12, 78%, 18%); */
 }
 
-.game-over-poster {
+.game-over-poster,
+.new-record-poster {
   display: none;
   position: fixed;
   inset: 0;

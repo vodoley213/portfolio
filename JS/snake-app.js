@@ -9,7 +9,15 @@ import {
   fieldSize,
 } from './snake-app-snake.js'
 
-import { updateMouse, drawMouse, clearMouseCount} from './snake-app-mouse.js'
+import {
+  updateMouse,
+  drawMouse,
+  clearMouseCount,
+  mouseCount,
+} from './snake-app-mouse.js'
+
+const STORAGE_PREFIX = 'SNAKE_APP'
+const HISCORE_STORAGE_KEY = `${STORAGE_PREFIX}-HISCORE`
 
 const snakeField = document.querySelector('#snake-field')
 
@@ -32,9 +40,22 @@ drawSnake(snakeField)
 
 async function updateGame(currentTime) {
   if (gameOver) {
-    const gameOverPoster = document.querySelector('.game-over-poster')
-    gameOverPoster.classList.add('game-over-display')
+    let gameOverPoster
     brownSnake(snakeField)
+
+    const isNewRecord = checkLSforRecord()
+    console.log(isNewRecord)
+    if (isNewRecord) {
+      setHiScoreToStorage()
+      gameOverPoster = document.querySelector('.new-record-poster')
+      const mouseCountInPoster = document.querySelector('[data-mouse-count]')
+      mouseCountInPoster.textContent = mouseCount
+    } else {
+      gameOverPoster = document.querySelector('.game-over-poster')
+    }
+
+    gameOverPoster.classList.add('game-over-display')
+
     await resetGame(gameOverPoster)
   }
 
@@ -99,4 +120,17 @@ function resetGame(gameOverPoster) {
       { once: true }
     )
   })
+}
+
+function setHiScoreToStorage() {
+  localStorage.setItem(HISCORE_STORAGE_KEY, JSON.stringify(mouseCount))
+}
+
+function checkLSforRecord() {
+  const lastRecord = localStorage.getItem(HISCORE_STORAGE_KEY)
+  if (lastRecord == null || JSON.parse(lastRecord) < mouseCount) {
+    return true
+  } else {
+    return false
+  }
 }

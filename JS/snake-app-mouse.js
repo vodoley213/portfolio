@@ -2,7 +2,7 @@ import { snakeGrowth, eatedOrOnSnake, fieldSize } from './snake-app-snake.js'
 
 let mouse = randomMousePosition()
 const GROWS_RATE = 1
-let mouseCount = 0
+export let mouseCount = 0
 
 export function updateMouse() {
   if (eatedOrOnSnake(mouse)) {
