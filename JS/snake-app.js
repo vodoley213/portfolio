@@ -9,7 +9,7 @@ import {
   fieldSize,
 } from './snake-app-snake.js'
 
-import { updateMouse, drawMouse } from './snake-app-mouse.js'
+import { updateMouse, drawMouse, clearMouseCount} from './snake-app-mouse.js'
 
 const snakeField = document.querySelector('#snake-field')
 
@@ -33,7 +33,6 @@ drawSnake(snakeField)
 async function updateGame(currentTime) {
   if (gameOver) {
     const gameOverPoster = document.querySelector('.game-over-poster')
-    console.log(gameOverPoster)
     gameOverPoster.classList.add('game-over-display')
     brownSnake(snakeField)
     await resetGame(gameOverPoster)
@@ -94,6 +93,7 @@ function resetGame(gameOverPoster) {
         }
         gameOver = false
         drawAll()
+        clearMouseCount()
         resolve(true)
       },
       { once: true }
