@@ -3,14 +3,6 @@
   inset: 0;
 }
 
-/* .full-screen::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgb(0, 0, 0, 0.9);
-  z-index: -10;
-} */
-
 .primary-header[data-fullscreen-mode]::before {
   content: '';
   position: fixed;
@@ -35,7 +27,6 @@
   margin: auto;
   background-color: hsl(30, 49%, 38%);
   outline: 1vmin solid hsl(30, 49%, 20%);
-  /* background-color: hsl(12, 78%, 18%); */
 }
 
 .game-over-poster,
@@ -185,21 +176,12 @@
   border: 0.25vmin solid hsl(13, 99%, 15%); */
 }
 
-/* .score > div:first-child {
-  margin-left: var(--size-900);
-}
-.score > div:last-child {
-  margin-left: auto;
-  margin-right: var(--size-900);
-} */
-
 .fullscreen-icon {
   width: calc(1.5 * var(--font-size-big));
   aspect-ratio: 1;
   object-fit: contain;
   margin-inline: auto;
   fill: var(--color-text-white);
-  /* stroke: var(--color-text-white); */
   cursor: pointer;
 }
 .fullscreen-icon:hover {

@@ -103,22 +103,26 @@ function checkForLoss() {
 
 function resetGame(gameOverPoster) {
   return new Promise((resolve, reject) => {
-    document.addEventListener(
-      'keydown',
-      () => {
-        gameOverPoster.classList.remove('game-over-display')
-        snakeBody.splice(0, snakeBody.length)
-        snakeBody[0] = {
-          x: Math.round(fieldSize / 2),
-          y: Math.round(fieldSize / 2),
-        }
-        gameOver = false
-        drawAll()
-        clearMouseCount()
-        resolve(true)
-      },
-      { once: true }
-    )
+    const events = ['keydown', 'touchstart']
+
+    events.forEach(event => {
+      document.addEventListener(
+        event,
+        () => {
+          gameOverPoster.classList.remove('game-over-display')
+          snakeBody.splice(0, snakeBody.length)
+          snakeBody[0] = {
+            x: Math.round(fieldSize / 2),
+            y: Math.round(fieldSize / 2),
+          }
+          gameOver = false
+          drawAll()
+          clearMouseCount()
+          resolve(true)
+        },
+        { once: true }
+      )
+    })
   })
 }
 
