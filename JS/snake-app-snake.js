@@ -1,7 +1,7 @@
 import { getSnakeDirection } from './snake-app-input.js'
 export let SNAKE_SPEED = 4 /* how many moves per second*/
 
-snakeSpeedUpdate()
+snakeSpeedControl()
 
 const field = document.querySelector('#snake-field')
 export const fieldSize =
@@ -209,7 +209,7 @@ function addSnakeParts() {
   newSnakeParts = 0
 }
 
-function snakeSpeedUpdate() {
+function snakeSpeedControl() {
   document.addEventListener('keydown', e => {
     switch (e.key) {
       case '+':

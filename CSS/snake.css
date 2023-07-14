@@ -55,6 +55,30 @@
   display: block;
 }
 
+.score {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min-content;
+  height: min-content;
+  visibility: hidden;
+}
+
+.score[data-how-many-mouses] {
+  visibility: visible;
+  animation: how-many 1500ms ease-in-out;
+}
+
+@keyframes how-many {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
 .snake,
 .snake-head-up,
 .snake-head-right,
@@ -160,22 +184,13 @@
   border: 0.25vmin solid hsl(13, 99%, 15%); */
 }
 
-.score {
-  display: flex;
-  width: 100vmin;
-  padding-bottom: var(--size-600);
-  padding-top: var(--size-600);
-  background-color: hsl(30, 49%, 38%);
-  color: var(--color-main-body);
-  border-bottom: 2px solid black;
-}
-.score > div:first-child {
+/* .score > div:first-child {
   margin-left: var(--size-900);
 }
 .score > div:last-child {
   margin-left: auto;
   margin-right: var(--size-900);
-}
+} */
 
 .fullscreen-icon {
   width: calc(1.5 * var(--font-size-big));
