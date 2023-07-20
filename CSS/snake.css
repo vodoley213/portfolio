@@ -15,7 +15,7 @@
 }
 
 :root {
-  --field-size: 21;
+  --field-size: 19;
 }
 
 .snake-field {
@@ -27,6 +27,17 @@
   margin: auto;
   background-color: hsl(30, 49%, 38%);
   outline: 1vmin solid hsl(30, 49%, 20%);
+}
+
+.snake-grid{
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+}
+
+.snake-grid > img {
+min-width: 160px;
+max-width: 200px;
 }
 
 .game-over-poster,
