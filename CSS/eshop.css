@@ -1,5 +1,17 @@
 /* Utility classes */
 
+.padding-1st-container-top {
+  padding-top: var(--size-padding-top-1st-container);
+}
+
+.invisible {
+  display: none;
+}
+
+.fs-main-cart {
+  font-size: calc(0.7 * var(--font-size-medium));
+}
+
 .grid {
   display: grid;
 }
@@ -22,21 +34,18 @@
 .margin-top-400 {
   margin-top: var(--size-400);
 }
-.fs-city {
-  font-size: 2em;
+
+.eshop-background {
+  background-color: #f1f1f1;
+  border: 1px solid var(--color-text-white);
+  box-shadow: 0 0 8px 6px rgba(128, 164, 38, 0.5);
 }
 
-.fs-weather {
-  font-size: 2em;
+.hide {
+  transform: translateX(110%);
 }
 
-.fs-weather-small {
-  font-size: 1.5em;
-}
-
-.no-wrap {
-  white-space: nowrap;
-}
+/* --- Основные стили --- */
 
 .products-block {
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -45,16 +54,16 @@
   /* background-color: var(--color-text-white); */
 }
 
-.product-card {
-  background-color: #f1f1f1;
-  padding: var(--size-400);
-  border: 1px solid var(--color-text-white);
-  box-shadow: 0 0 8px 6px rgba(128, 164, 38, 0.5);
-  /* border-radius: 10px; */
+.products-block a {
+  text-decoration: none;
+}
 
+.product-card {
+  padding: var(--size-400);
   cursor: pointer;
   transition: 0.35s ease;
 }
+
 .product-card:hover,
 .product-card:focus-within {
   transform: scale(1.03);
@@ -127,7 +136,7 @@
   }
 }
 
-.x-close {
+/* .x-close {
   margin-left: auto;
   font-size: var(--size-500);
   cursor: pointer;
@@ -135,4 +144,157 @@
 .x-close:hover,
 .x-close:focus-visible {
   color: var(--color-main-accent);
+} */
+
+/* --- Корзина иконка --- */
+
+.shoping-cart {
+  position: relative;
+  width: 40px;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.shopping-cart__icon {
+  position: absolute;
+  inset: 0;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+.shoping-cart__quantity {
+  position: absolute;
+  inset: 0 0 10px 5px;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+
+  color: var(--color-main-accent);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (min-width: 46em) {
+  .shoping-cart {
+    width: 56px;
+  }
+  .shopping-cart__icon {
+    width: 3.5rem;
+    aspect-ratio: 1;
+  }
+  .shoping-cart__quantity {
+    inset: 0 0 13px 5px;
+    font-size: 1.125rem;
+  }
+}
+
+/* --- Корзина --- */
+
+.shoping-cart-list {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  height: 100dvh;
+  padding: var(--size-500) var(--size-500) var(--size-500) var(--size-600);
+
+  transition: 350ms;
+  z-index: 1;
+}
+.show-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+
+.shoping-cart-list-product {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-400);
+  width: 20rem;
+}
+
+.shoping-cart-list-product__description {
+  align-content: start;
+  gap: 0.5em;
+}
+
+@media (min-width: 46em) {
+  .shoping-cart-list-product {
+    grid-template-columns: 1fr 2fr;
+  }
+  .shoping-cart-list-product {
+    width: 30rem;
+  }
+  .shoping-cart-list-product__description {
+    align-content: start;
+    gap: 1em;
+  }
+}
+
+@media (min-width: 67em) {
+  .shoping-cart-list-product {
+    grid-template-columns: 1fr 2fr;
+  }
+  .shoping-cart-list-product {
+    width: 30rem;
+  }
+  .shoping-cart-list-product__description {
+    align-content: normal;
+    gap: 0em;
+  }
+}
+
+.shoping-cart-list-product > img {
+  aspect-ratio: 1/1.3;
+  object-fit: cover;
+}
+
+/* ----- Кнопка количества ----- */
+.shoping-cart-list-product__price {
+  display: flex;
+  gap: var(--size-400);
+  align-items: center;
+}
+.tree-product-card__quantity-input {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  background-color: #f1f1f1;
+  border: 1px solid var(--color-outline-on-dark);
+  border-radius: 28px;
+}
+.tree-product-card__quantity-change {
+  margin: 8px;
+  padding: 2px;
+  font-size: 1rem;
+  /* border: 1px solid red; */
+}
+.tree-product-card__quantity-change:hover {
+  background: hsl(0, 0%, 75%);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tree-product-card__quantity-change > svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.tree-product-card__quantity-number {
+  padding-inline: 0rem;
+  /* border: 1px solid blue; */
+}
+
+@media (min-width: 46em) {
+  .tree-product-card__quantity-number {
+    padding-inline: 1rem;
+  }
+}
+
+@media (min-width: 67em) {
+  .tree-product-card__quantity-number {
+    padding-inline: 2rem;
+  }
 }

@@ -1,23 +1,16 @@
-.scroll-margin-top {
-  scroll-margin-top: 5rem;
+.shopping-cart__icon {
+  position: relative;
+  background-color: bisque;
+  width: 2.5rem;
+  aspect-ratio: 1;
 }
 
-body {
-  max-width: 500px;
-  font-family: Roboto, sans-serif;
-  line-height: 1.4;
-  margin: 0 auto;
-  padding: 4rem 1rem;
-  font-size: 1.5rem;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  text-align: center;
-  color: white;
-  width: 100%;
-  padding: 1rem;
-  background: #1976d2;
+.shopping-cart__icon::before {
+  content: '🌸';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background-color: brown;
 }
