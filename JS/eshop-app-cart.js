@@ -1,5 +1,10 @@
 import { formatCurrency } from './utils/formatCurrency.js'
-let shoppingCart = []
+const LOCAL_STORAGE_KEY = 'GARDEN_PLANTS_STORE-cart'
+const cartQty = document.querySelector('[data-cart-quantity]')
+
+const shoppingCart = loadCart()
+itemsQtyInCartIcon()
+
 const cartItemTemplate = document.querySelector('#item-in-cart-template')
 
 const URL = '/assets/plants.json'
@@ -16,8 +21,10 @@ const shopingCartIcon = document.querySelector('#shoping-cart-icon')
 const shopingCartContainer = document.querySelector('#shoping-cart')
 const shopingCartList = document.querySelector('#shoping-cart-list')
 const shopingCartOverlay = document.querySelector('#shoping-cart-overlay')
-const cartQty = document.querySelector('[data-cart-quantity]')
 const cartTotalSum = document.querySelector('[data-total-sum]')
+const cartTotalSumField = document.querySelector('[data-total-sum-field]')
+const emptycart = document.querySelector('[data-empty-cart]')
+
 
 // Показать/скрыть корзину при клике
 shopingCartIcon.addEventListener('click', () => {
@@ -42,6 +49,7 @@ export function addTocart(itemId) {
     shoppingCart.push({ id: itemId, qty: 1 })
   }
   itemsQtyInCartIcon()
+  saveCart()
 }
 
 // Изменение количества в корзине и пересчет суммы корзины
@@ -68,16 +76,30 @@ shopingCartContainer.addEventListener('click', e => {
     const infexOfItem = shoppingCart.indexOf(itemInCartArray)
     shoppingCart.splice(infexOfItem, 1)
     parentOfItem.remove()
+    cartTotalSumField.classList.add('visibility-hidden')
   } else {
     itemQuantityField.textContent = itemQuantity
     itemInCartArray.qty = itemQuantity
   }
-  totalSumInCart()
+  if (shoppingCart.length === 0) {
+    emptycart.classList.remove('display-none')
+  } else {
+    totalSumInCart()
+  }
   itemsQtyInCartIcon()
+  saveCart()
 })
 
 function renderCart() {
   shopingCartList.innerHTML = ''
+  if (shoppingCart.length === 0) {
+    emptycart.classList.remove('display-none')
+    cartTotalSumField.classList.add('visibility-hidden')
+    console.log(cartTotalSumField)
+    return
+  }
+  emptycart.classList.add('display-none')
+  cartTotalSumField.classList.remove('visibility-hidden')
   const shoppingCartFragment = new DocumentFragment()
 
   shoppingCart.forEach(itemToRender => {
@@ -110,8 +132,16 @@ function renderCart() {
 
   shopingCartList.append(shoppingCartFragment)
 
-  // cartTotalSum.textContent = formatCurrency(totalSumInCart() / 100)
   totalSumInCart()
+}
+
+function saveCart() {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(shoppingCart))
+}
+
+function loadCart() {
+  const cart = localStorage.getItem(LOCAL_STORAGE_KEY)
+  return JSON.parse(cart) ?? []
 }
 
 // Подсчет суммы корзины

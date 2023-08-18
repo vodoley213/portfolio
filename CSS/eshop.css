@@ -39,6 +39,10 @@
   margin-top: var(--size-400);
 }
 
+.margin-top-600 {
+  margin-top: var(--size-600);
+}
+
 .eshop-background {
   background-color: #f1f1f1;
   border: 1px solid var(--color-text-white);
@@ -49,6 +53,13 @@
   transform: translateX(110%);
 }
 
+.display-none {
+  display: none;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
 .z-index-plus {
   z-index: 10;
 }
@@ -260,10 +271,10 @@
   object-fit: cover;
 }
 
-.total-sum{
-  grid-column: 1/3;
+.total-sum {
   display: flex;
   justify-content: space-between;
+  grid-column: 1/3;
 }
 
 /* ----- Кнопка количества ----- */
@@ -284,7 +295,6 @@
   margin: 8px;
   padding: 2px;
   font-size: 1rem;
-  border: 1px solid red;
 }
 .tree-product-card__quantity-change:hover {
   background: hsl(0, 0%, 75%);
