@@ -284,7 +284,7 @@
   margin: 8px;
   padding: 2px;
   font-size: 1rem;
-  /* border: 1px solid red; */
+  border: 1px solid red;
 }
 .tree-product-card__quantity-change:hover {
   background: hsl(0, 0%, 75%);

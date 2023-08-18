@@ -32,10 +32,7 @@ shopingCartOverlay.addEventListener('click', () => {
   body.classList.remove('overflow-hidden')
 })
 
-// Добавить товары в корзину
-// -- Click event для добавления
-// -- Добавление нескольких товаров одного типа
-// -- Вычисление суммы
+// Добавить товары в корзину, нескольких товаров одного типа
 export function addTocart(itemId) {
   const existingItemInCart = shoppingCart.find(tree => tree.id === itemId)
 
@@ -44,10 +41,40 @@ export function addTocart(itemId) {
   } else {
     shoppingCart.push({ id: itemId, qty: 1 })
   }
-  cartQty.textContent = shoppingCart.reduce((sum, item) => {
-    return sum + item.qty
-  }, 0)
+  itemsQtyInCartIcon()
 }
+
+// Изменение количества в корзине и пересчет суммы корзины
+shopingCartContainer.addEventListener('click', e => {
+  const eTargetDecreaseQty = e.target.closest('[data-decrease-qty]')
+  const eTargetIncreaseQty = e.target.closest('[data-increase-qty]')
+  if (eTargetDecreaseQty == null && eTargetIncreaseQty == null) return
+
+  const parentOfItem = e.target.closest('[data-item-in-cart]')
+  const itemId = +parentOfItem.dataset.itemId
+  const itemQuantityField = e.target.closest('[data-quantity-input]')
+    .children[1]
+  let itemQuantity = +itemQuantityField.textContent
+
+  const itemInCartArray = shoppingCart.find(item => item.id === itemId)
+
+  if (eTargetDecreaseQty) {
+    itemQuantity--
+  } else if (eTargetIncreaseQty) {
+    itemQuantity++
+  }
+
+  if (itemQuantity === 0) {
+    const infexOfItem = shoppingCart.indexOf(itemInCartArray)
+    shoppingCart.splice(infexOfItem, 1)
+    parentOfItem.remove()
+  } else {
+    itemQuantityField.textContent = itemQuantity
+    itemInCartArray.qty = itemQuantity
+  }
+  totalSumInCart()
+  itemsQtyInCartIcon()
+})
 
 function renderCart() {
   shopingCartList.innerHTML = ''
@@ -83,7 +110,8 @@ function renderCart() {
 
   shopingCartList.append(shoppingCartFragment)
 
-  cartTotalSum.textContent = formatCurrency(totalSumInCart() / 100)
+  // cartTotalSum.textContent = formatCurrency(totalSumInCart() / 100)
+  totalSumInCart()
 }
 
 // Подсчет суммы корзины
@@ -94,5 +122,12 @@ function totalSumInCart() {
     )
     return sum + itemInDB.pricePenny * itemInCart.qty
   }, 0)
-  return totalPenny
+  cartTotalSum.textContent = formatCurrency(totalPenny / 100)
+}
+
+// Количество товаров на иконке корзины
+function itemsQtyInCartIcon() {
+  cartQty.textContent = shoppingCart.reduce((sum, item) => {
+    return sum + item.qty
+  }, 0)
 }
