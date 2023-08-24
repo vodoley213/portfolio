@@ -13,7 +13,12 @@ const plantTemplateHtml = parser.parseFromString(textFromIdUrl, 'text/html')
 const productCardTemplate = plantTemplateHtml.querySelector(
   '#product-card-template'
 )
-console.log(productCardTemplate)
+
+  const placeToAppendCard = document.querySelector('#placeToAppendCard')
+  const productCardFromTemplate = productCardTemplate.content.cloneNode(true)
+
+  const productCardContainer =
+    productCardFromTemplate.querySelector('[data-product-id]')
 
 renderFullProductCard()
 
@@ -59,18 +64,14 @@ renderFullProductCard()
 function renderFullProductCard() {
   const item = shoppingItems.find(itemFromDB => pageId === itemFromDB.id)
 
-  const placeToAppendCard = document.querySelector('#placeToAppendCard')
-  const productCardFromTemplate = productCardTemplate.content.cloneNode(true)
 
-  const productCardContainer =
-    productCardFromTemplate.querySelector('[data-product-id]')
 
   productCardContainer.dataset.itemId = pageId
 
   const productImage = productCardFromTemplate.querySelector(
     '[data-product-image]'
   )
-  productImage.src = `../../${item.urlImg}`
+  productImage.src = item.urlImg
 
   const productTitle = productCardFromTemplate.querySelector(
     '[data-product-title]'
