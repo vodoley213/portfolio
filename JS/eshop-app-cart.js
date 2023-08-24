@@ -7,7 +7,10 @@ itemsQtyInCartIcon()
 
 const cartItemTemplate = document.querySelector('#item-in-cart-template')
 
-const URL = '/assets/plants.json'
+// const htmlPageUrl = document.location.href
+// console.log(htmlPageUrl)
+
+const URL = '/portfoliowebsite/JS/plants.json'
 const responseFromUrl = await fetch(URL)
 const shoppingItems = await responseFromUrl.json()
 
@@ -24,7 +27,6 @@ const shopingCartOverlay = document.querySelector('#shoping-cart-overlay')
 const cartTotalSum = document.querySelector('[data-total-sum]')
 const cartTotalSumField = document.querySelector('[data-total-sum-field]')
 const emptycart = document.querySelector('[data-empty-cart]')
-
 
 // Показать/скрыть корзину при клике
 shopingCartIcon.addEventListener('click', () => {

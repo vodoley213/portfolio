@@ -25,7 +25,16 @@
 .tree-product-card__add-to-cart-group {
   display: flex;
   gap: var(--size-600);
+  align-items: center;
   /* justify-content: space-evenly; */
+}
+
+.product-card__price {
+  width: max-content;
+  padding: 10px 15px;
+  color: var(--color-text-white);
+  background-color: hsl(77, 62%, 40%);
+  
 }
 
 .tree-product-card__quantity-input {
@@ -42,9 +51,9 @@
   font-size: 1rem;
 }
 .tree-product-card__quantity-change:hover {
-background: hsl(0, 0%, 75%);
-border-radius: 50%;
-cursor: pointer;
+  background: hsl(0, 0%, 75%);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .tree-product-card__quantity-change > svg {
@@ -52,8 +61,8 @@ cursor: pointer;
   height: 1.2em;
 }
 
-.tree-product-card__quantity-number{
-padding-inline: 2rem;
+.tree-product-card__quantity-number {
+  padding-inline: 2rem;
 }
 
 /* .tree-product-card__quantity-input input {

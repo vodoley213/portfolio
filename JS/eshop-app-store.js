@@ -4,13 +4,14 @@ import { addTocart } from './eshop-app-cart.js'
 const storeItemTemplate = document.querySelector('#shopping-card-template')
 const itemsBlock = document.querySelector('#products-block')
 
-const URL = '/assets/plants.json'
+const URL = '/portfoliowebsite/JS/plants.json'
 const responseFromUrl = await fetch(URL)
-const shoppingItems = await responseFromUrl.json()
+export const shoppingItems = await responseFromUrl.json()
 
 // console.log(shoppingItems)
 
 export function setupShop() {
+  if (itemsBlock == null) return
   document.addEventListener('click', e => {
     if (e.target.matches('[data-add-to-cart-button]')) {
       const itemId = e.target.closest('[data-shopping-item]').dataset.itemId
@@ -27,8 +28,8 @@ function renderShopingCard(item) {
   const container = shoppingItem.querySelector('[data-shopping-item]')
   container.dataset.itemId = item.id
 
-  // const productUrl = shoppingItem.querySelector('[data-product-url]')
-  // productUrl.href = `HTML/${item.URL}`
+  const productUrl = shoppingItem.querySelector('[data-link-to-product]')
+  productUrl.href = `HTML/${item.URL}`
 
   const productImage = shoppingItem.querySelector('[data-product-image]')
   productImage.src = item.urlImg

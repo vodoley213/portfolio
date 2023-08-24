@@ -3,6 +3,3 @@ import { setupShoppingCart } from './eshop-app-cart.js'
 
 setupShop()
 setupShoppingCart()
-
-
-
