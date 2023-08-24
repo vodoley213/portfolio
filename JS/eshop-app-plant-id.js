@@ -1,5 +1,6 @@
 import { shoppingItems } from './eshop-app-store.js'
 import { formatCurrency } from './utils/formatCurrency.js'
+import { addTocart } from './eshop-app-cart.js'
 const productPageUrl = document.location.href
 const pageId = +productPageUrl.match(/(?<=id)\d*/)[0]
 
@@ -14,57 +15,49 @@ const productCardTemplate = plantTemplateHtml.querySelector(
   '#product-card-template'
 )
 
-  const placeToAppendCard = document.querySelector('#placeToAppendCard')
-  const productCardFromTemplate = productCardTemplate.content.cloneNode(true)
+const placeToAppendCard = document.querySelector('#placeToAppendCard')
+const productCardFromTemplate = productCardTemplate.content.cloneNode(true)
 
-  const productCardContainer =
-    productCardFromTemplate.querySelector('[data-product-id]')
+const productCardContainer =
+  productCardFromTemplate.querySelector('[data-product-id]')
 
 renderFullProductCard()
+const itemQuantityField = document.querySelector('[data-trees-quantity]')
 
-// productCardContainer.addEventListener('click', () => console.log('sdfsdfsf'))
+let itemQuantity = +itemQuantityField.textContent
 
-// shopingCartContainer.addEventListener('click', e => {
-//   const eTargetDecreaseQty = e.target.closest('[data-decrease-qty]')
-//   const eTargetIncreaseQty = e.target.closest('[data-decrease-qty]')
-//   if (eTargetDecreaseQty == null && eTargetIncreaseQty == null) return
+productCardContainer.addEventListener('click', e => {
+  const eTargetDecreaseQty = e.target.closest('[data-decrease-qty]')
+  const eTargetIncreaseQty = e.target.closest('[data-increase-qty]')
+  const addToCartButtonPressed = e.target.matches('[data-add-to-cart-button]')
+  console.log(addToCartButtonPressed)
+  if (
+    eTargetDecreaseQty == null &&
+    eTargetIncreaseQty == null &&
+    addToCartButtonPressed === false
+  )
+    return
 
-//   const parentOfItem = e.target.closest('[data-item-in-cart]')
-//   const itemId = +parentOfItem.dataset.itemId
-//   const itemQuantityField = e.target.closest('[data-quantity-input]')
-//     .children[1]
-//   let itemQuantity = +itemQuantityField.textContent
-
-//   const itemInCartArray = shoppingCart.find(item => item.id === itemId)
-
-//   if (eTargetDecreaseQty) {
-//     itemQuantity--
-//   } else if (eTargetIncreaseQty) {
-//     itemQuantity++
-//   }
-
-//   if (itemQuantity === 0) {
-//     const infexOfItem = shoppingCart.indexOf(itemInCartArray)
-//     shoppingCart.splice(infexOfItem, 1)
-//     parentOfItem.remove()
-//     cartTotalSumField.classList.add('visibility-hidden')
-//   } else {
-//     itemQuantityField.textContent = itemQuantity
-//     itemInCartArray.qty = itemQuantity
-//   }
-//   if (shoppingCart.length === 0) {
-//     emptycart.classList.remove('display-none')
-//   } else {
-//     totalSumInCart()
-//   }
-//   itemsQtyInCartIcon()
-//   saveCart()
-// })
+  if (addToCartButtonPressed === true) {
+    console.log('Add button')
+    addTocart(pageId, itemQuantity)
+    return
+  } else if (eTargetDecreaseQty) {
+    console.log('Minus')
+    itemQuantity--
+  } else if (eTargetIncreaseQty) {
+    console.log('plus')
+    itemQuantity++
+  }
+  if (itemQuantity === 0) {
+    itemQuantity = 1
+    return
+  }
+  itemQuantityField.textContent = itemQuantity
+})
 
 function renderFullProductCard() {
   const item = shoppingItems.find(itemFromDB => pageId === itemFromDB.id)
-
-
 
   productCardContainer.dataset.itemId = pageId
 

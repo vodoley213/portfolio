@@ -17,219 +17,206 @@
     <link rel="stylesheet" href="../../style.css?2" />
     <link rel="stylesheet" href="../../CSS/eshop.css" />
     <link rel="stylesheet" href="plants.css" />
-    <title>Portfolio Website</title>
+    <title>Portfolio Website - Магазин E-commerce</title>
   </head>
   <body>
-    <header class="primary-header z-index-plus">
-      <div class="container">
-        <div class="nav-wrapper">
-          <div class="logo">
-            <a href="../../index.html"
-              ><h3 class="logo-color fs-medium-heading" href="index.html">
-                Портфолио
-              </h3></a
+    <div data-sticky-parent>
+      <header class="primary-header z-index-plus">
+        <div class="container">
+          <div class="nav-wrapper">
+            <div class="logo">
+              <a href="../../index.html"
+                ><h3 class="logo-color fs-medium-heading" href="index.html">
+                  Портфолио
+                </h3></a
+              >
+              <span class="fs-small">&nbsp;The portfolio website</span>
+            </div>
+            <button
+              class="mobile-nav-toggle invisible"
+              aria-controls="primary-navigation"
+              aria-expanded="false"
             >
-            <span class="fs-small">&nbsp;The portfolio website</span>
+              <svg class="icon-hamburger" aria-hidden="true">
+                <use href="#icon-hamburger"></use>
+              </svg>
+              <svg class="icon-close hide" aria-hidden="true">
+                <use href="#icon-close"></use>
+              </svg>
+              <span class="visually-hidden">Menu</span>
+            </button>
+            <nav class="primary-navigation invisible" id="primary-navigation">
+              <ul aria-label="Primary" role="list" class="nav-list">
+                <li>
+                  <svg class="nav-icons"><use href="#menu-home"></use></svg>
+                  <a href="index.html">Домой</a>
+                </li>
+                <li>
+                  <svg class="nav-icons"><use href="#menu-about"></use></svg>
+                  <a href="index.html#about">Обо мне</a>
+                </li>
+                <li>
+                  <svg class="nav-icons">
+                    <use href="#menu-portfolio"></use>
+                  </svg>
+                  <a href="index.html#portfolio">Портфолио</a>
+                </li>
+                <li>
+                  <svg class="nav-icons"><use href="#menu-blog"></use></svg>
+                  <a href="./index.html#blog">Блог</a>
+                </li>
+                <li>
+                  <svg class="nav-icons"><use href="#menu-contacts"></use></svg>
+                  <a href="./index.html#contacts">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+            <div id="shoping-cart-overlay" class="overlay"></div>
+            <!-- Иконка корзины -->
+            <div type="button" id="shoping-cart-icon" class="shoping-cart">
+              <svg class="shopping-cart__icon">
+                <use href="#cart"></use>
+              </svg>
+              <div data-cart-quantity class="shoping-cart__quantity"></div>
+            </div>
+            <!-- Корзина -->
+            <div
+              class="shoping-cart-list eshop-background hide"
+              id="shoping-cart"
+            >
+              <h2 class="fs-main-cart dark-color">Ваша корзина</h2>
+              <h3
+                data-empty-cart
+                class="dark-color fw-bold margin-top-600 display-none"
+              >
+                Корзина пуста
+              </h3>
+              <div id="shoping-cart-list"></div>
+              <div data-total-sum-field class="total-sum">
+                <div class="dark-color fw-bold fs-main-cart">Итого:</div>
+                <div class="dark-color fw-bold fs-main-cart">
+                  <span data-total-sum>0</span> руб.
+                </div>
+              </div>
+            </div>
           </div>
-          <button
-            class="mobile-nav-toggle invisible"
-            aria-controls="primary-navigation"
-            aria-expanded="false"
-          >
-            <svg class="icon-hamburger" aria-hidden="true">
-              <use href="#icon-hamburger"></use>
-            </svg>
-            <svg class="icon-close hide" aria-hidden="true">
-              <use href="#icon-close"></use>
-            </svg>
-            <span class="visually-hidden">Menu</span>
-          </button>
-          <nav class="primary-navigation invisible" id="primary-navigation">
-            <ul aria-label="Primary" role="list" class="nav-list">
-              <li>
-                <svg class="nav-icons"><use href="#menu-home"></use></svg>
-                <a href="index.html">Домой</a>
-              </li>
-              <li>
-                <svg class="nav-icons"><use href="#menu-about"></use></svg>
-                <a href="index.html#about">Обо мне</a>
-              </li>
-              <li>
-                <svg class="nav-icons">
-                  <use href="#menu-portfolio"></use>
-                </svg>
-                <a href="index.html#portfolio">Портфолио</a>
-              </li>
-              <li>
-                <svg class="nav-icons"><use href="#menu-blog"></use></svg>
-                <a href="./index.html#blog">Блог</a>
-              </li>
-              <li>
-                <svg class="nav-icons"><use href="#menu-contacts"></use></svg>
-                <a href="./index.html#contacts">Контакты</a>
-              </li>
-            </ul>
-          </nav>
-
-          <div id="shoping-cart-overlay" class="overlay"></div>
-
-          <!-- Иконка корзины -->
-          <div type="button" id="shoping-cart-icon" class="shoping-cart">
-            <svg class="shopping-cart__icon">
-              <use href="#cart"></use>
-            </svg>
-            <div data-cart-quantity class="shoping-cart__quantity"></div>
+        </div>
+      </header>
+      <main>
+        <section>
+          <div class="container line padding-1st-container-top">
+            <p>
+              Приложение магазина садовых растений E-commerce сделано с
+              использованием: CSS grid, CSS flex, медиа-запросы, адаптивный
+              дизайн, Mobile first, CSS-переменные, @font-face. По
+              <span class="text-accent">JavaScript</span> использовано: модули,
+              работа с HTML-шаблонами (template), Fetch API, async/ await,
+              LocalStorage.
+            </p>
+            <p>Коды JavaScript:</p>
+            <div class="buttons-in-row fs-footer wrap margin-top-400">
+              <button class="fw-bold text-white">
+                <a href="../code-eshop-app.html">eshop-app.js</a>
+              </button>
+              <button class="fw-bold text-white">
+                <a href="../code-eshop-app-cart.html">eshop-app-cart.js</a>
+              </button>
+              <button class="fw-bold text-white">
+                <a href="../code-eshop-app-plant.html">eshop-app-plant.js</a>
+              </button>
+              <button class="fw-bold text-white">
+                <a href="../code-eshop-app-store.html">eshop-app-store.js</a>
+              </button>
+              <button class="fw-bold text-white">
+                <a href="https://github.com/vodoley213">GitHub</a>
+              </button>
+            </div>
+            <img
+              class="centered margin-block-600"
+              src="../../images/plants_1440.jpg"
+              srcset="
+                ../../images/plants_480.jpg   480w,
+                ../../images/plants_800.jpg   800w,
+                ../../images/plants_1200.jpg 1200w,
+                ../../images/plants_1440.jpg 1440w
+              "
+            />
           </div>
-
-          <!-- Корзина -->
+        </section>
+        <section>
           <div
-            class="shoping-cart-list eshop-background hide"
-            id="shoping-cart"
+            id="placeToAppendCard"
+            class="container line padding-1st-container"
+          ></div>
+        </section>
+        <!-- Шаблон продуктовой карты в корзине -->
+        <template id="item-in-cart-template">
+          <article
+            data-item-in-cart
+            class="shoping-cart-list-product grid padding-block-600"
           >
-            <h2 class="fs-main-cart dark-color">Ваша корзина</h2>
-            <h3
-              data-empty-cart
-              class="dark-color fw-bold margin-top-600 display-none"
-            >
-              Корзина пуста
-            </h3>
-            <div id="shoping-cart-list"></div>
-            <div data-total-sum-field class="total-sum">
-              <div class="dark-color fw-bold fs-main-cart">Итого:</div>
-              <div class="dark-color fw-bold fs-main-cart">
-                <span data-total-sum>0</span> руб.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main>
-      <section>
-        <div class="container line padding-1st-container-top">
-          <p>
-            Погодное приложение сделано с использованием CSS grid, CSS flex,
-            медиа-запросы, адаптивный дизайн, Mobile first, CSS-переменные,
-            @font-face. По
-            <span class="text-accent">JavaScript</span> использовано: модули,
-            работа с HTML-шаблонами (template), работа с API, Object
-            Destructuring, Промисы (async, await), LocalStorage, Map и другое.
-          </p>
-          <p>Коды JavaScript:</p>
-          <div class="buttons-in-row fs-footer wrap margin-top-400">
-            <button class="fw-bold text-white">
-              <a href="HTML/code-weather-app.html">weather-app.js</a>
-            </button>
-            <button class="fw-bold text-white">
-              <a href="HTML/code-parsing-weather-API.html"
-                >parsing-weather-API.js</a
-              >
-            </button>
-            <button class="fw-bold text-white">
-              <a href="HTML/code-weather-app-render-card.html"
-                >weather-app-render-card.js</a
-              >
-            </button>
-            <button class="fw-bold text-white">
-              <a href="HTML/code-weather-app-cities.html"
-                >weather-app-cities.js</a
-              >
-            </button>
-            <button class="fw-bold text-white">
-              <a href="HTML/code-weather-app-icons.html"
-                >weather-app-icons.js</a
-              >
-            </button>
-            <button class="fw-bold text-white">
-              <a href="https://github.com/vodoley213">GitHub</a>
-            </button>
-          </div>
-          <img
-            class="centered margin-block-600"
-            src="../../images/plants_1440.jpg"
-            srcset="
-              ../../images/plants_480.jpg   480w,
-              ../../images/plants_800.jpg   800w,
-              ../../images/plants_1200.jpg 1200w,
-              ../../images/plants_1440.jpg 1440w
-            "
-          />
-        </div>
-      </section>
-      <section>
-        <div
-          id="placeToAppendCard"
-          class="container line padding-1st-container"
-        ></div>
-      </section>
-
-      <!-- Шаблон продуктовой карты в корзине -->
-      <template id="item-in-cart-template">
-        <article
-          data-item-in-cart
-          class="shoping-cart-list-product grid padding-block-600"
-        >
-          <!-- <img data-item-in-cart-image src="../../images/plants/1.jpg" alt="" /> -->
-          <img data-item-in-cart-image alt="" />
-          <div class="shoping-cart-list-product__description grid">
-            <h3 data-item-in-cart-title class="dark-color fw-bold"></h3>
-            <div data-item-in-cart-desc class="fs-desc"></div>
-            <div class="shoping-cart-list-product__price">
-              <div data-item-in-cart-price class="dark-color"></div>
-              <div
-                data-quantity-input
-                class="tree-product-card__quantity-input dark-color"
-              >
+            <!-- <img data-item-in-cart-image src="../../images/plants/1.jpg" alt="" /> -->
+            <img data-item-in-cart-image alt="" />
+            <div class="shoping-cart-list-product__description grid">
+              <h3 data-item-in-cart-title class="dark-color fw-bold"></h3>
+              <div data-item-in-cart-desc class="fs-desc"></div>
+              <div class="shoping-cart-list-product__price">
+                <div data-item-in-cart-price class="dark-color"></div>
                 <div
-                  data-decrease-qty
-                  type="button"
-                  class="tree-product-card__quantity-change"
-                  aria-labelledby="decrease-qty"
+                  data-quantity-input
+                  class="tree-product-card__quantity-input dark-color"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  <div
+                    data-decrease-qty
+                    type="button"
+                    class="tree-product-card__quantity-change"
+                    aria-labelledby="decrease-qty"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M18 12H6"
-                    ></path>
-                  </svg>
-                </div>
-                <div
-                  data-trees-quantity
-                  class="tree-product-card__quantity-number"
-                ></div>
-                <div
-                  data-increase-qty
-                  type="button"
-                  class="tree-product-card__quantity-change"
-                  aria-labelledby="increase-qty"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M18 12H6"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div
+                    data-trees-quantity
+                    class="tree-product-card__quantity-number"
+                  ></div>
+                  <div
+                    data-increase-qty
+                    type="button"
+                    class="tree-product-card__quantity-change"
+                    aria-labelledby="increase-qty"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      ></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </article>
-      </template>
-    </main>
+          </article>
+        </template>
+      </main>
+    </div>
 
     <!-- footer -->
     <footer class="fs-footer padding-block-600">

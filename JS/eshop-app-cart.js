@@ -2,13 +2,10 @@ import { formatCurrency } from './utils/formatCurrency.js'
 const LOCAL_STORAGE_KEY = 'GARDEN_PLANTS_STORE-cart'
 const cartQty = document.querySelector('[data-cart-quantity]')
 
-const shoppingCart = loadCart()
+export const shoppingCart = loadCart()
 itemsQtyInCartIcon()
 
 const cartItemTemplate = document.querySelector('#item-in-cart-template')
-
-// const htmlPageUrl = document.location.href
-// console.log(htmlPageUrl)
 
 const URL = '/portfoliowebsite/JS/plants.json'
 const responseFromUrl = await fetch(URL)
@@ -42,13 +39,13 @@ shopingCartOverlay.addEventListener('click', () => {
 })
 
 // Добавить товары в корзину, нескольких товаров одного типа
-export function addTocart(itemId) {
+export function addTocart(itemId, quantity = 1) {
   const existingItemInCart = shoppingCart.find(tree => tree.id === itemId)
 
   if (existingItemInCart) {
-    existingItemInCart.qty++
+    existingItemInCart.qty = existingItemInCart.qty + quantity
   } else {
-    shoppingCart.push({ id: itemId, qty: 1 })
+    shoppingCart.push({ id: itemId, qty: quantity })
   }
   itemsQtyInCartIcon()
   saveCart()

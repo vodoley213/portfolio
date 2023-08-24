@@ -38,7 +38,7 @@
                       1
                     </div>
                     <div
-                      data-decrease-qty
+                      data-increase-qty
                       type="button"
                       class="tree-product-card__quantity-change"
                       aria-labelledby="increase-qty"
@@ -58,7 +58,7 @@
                       </svg>
                     </div>
                   </div>
-                  <button class="product-card__button">Добавить в корзину</button>
+                  <button data-add-to-cart-button class="product-card__button">Добавить в корзину</button>
                 </div>
           </div>
         </article>
