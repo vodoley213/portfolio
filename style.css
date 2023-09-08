@@ -413,8 +413,8 @@ button a:hover {
   color: var(--color-text-white);
 }
 
-button:hover:not(.mobile-nav-toggle),
-button:focus-visible:not(.mobile-nav-toggle) {
+button:hover:not(.mobile-nav-toggle,.currency_converter___button),
+button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
   background-color: var(--color-outline-on-dark);
   border: 2px solid var(--color-outline-on-dark);
 }
