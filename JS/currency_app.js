@@ -1,35 +1,52 @@
 import { CURRENCY_CODES } from './currency_app_codes.js'
+import { formatNumber, toNumber } from './utils/formatNumber.js'
 
 const inputField = document.querySelectorAll('input')
 const currencyCode = document.querySelectorAll('[data-currency-code]')
 const countryFlag = document.querySelectorAll('[data-country-flag]')
 const errorMessage = document.querySelector('#error')
 const gettinDataMessage = document.querySelector('#getting_data')
+let exchangeRate = 1
 
 const URL = 'https://api.exchangerate.host'
 const options = {
   base: 'USD',
-  symbols: 'EUR,RUB,TRY,KZT,CAD,GBP,CHF', // Швейцария - CHF
+  symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF', // Швейцария - CHF
 }
 
 let currencyRatesToday
 let currencyRatesForYear
 
-// Set default currencies
+// 1. Set default currencies and the base in options
 setCurrencies('USD', 'RUB')
 
 // 2. Загружаем данные с сервера и записываем их в массивы:
 // currencyRatesToday и currencyRatesForYear
 
-getCurrencyForYear(options)
-getCurrencyToday(options)
+currencyRatesToday = await getCurrencyToday(options)
+currencyRatesForYear = await getCurrencyForYear(options)
 
-// console.log(currencyRatesToday)
-// console.log(currencyRatesForYear)
+// 3. Устанавливаем курсы валют в зивисимости от выбранных валют
+// setCurrencyRate()
 
-// setCurrencyRates()
+setCurrencyRate()
+
+inputField[0].addEventListener('input', () => {
+  inputField[1].value = formatNumber(
+    toNumber(inputField[0].value) * exchangeRate
+  )
+})
+
+inputField[1].addEventListener('input', () => {
+  inputField[0].value = formatNumber(
+    toNumber(inputField[1].value) / exchangeRate
+  )
+})
+
+// ----- Additional functions -----
 
 function setCurrencies(currencyOne, currencyTwo) {
+  options.base = currencyOne
   currencyCode[0].dataset.currencyCode = currencyOne
   currencyCode[1].dataset.currencyCode = currencyTwo
   currencyCode[0].textContent = currencyOne
@@ -40,30 +57,18 @@ function setCurrencies(currencyOne, currencyTwo) {
   countryFlag[1].src = `images/svg/${CURRENCY_CODES[currencyTwo]}`
 }
 
-// function setCurrencyRates(){
-//   const currencyOne =
-// }
+function setCurrencyRate() {
+  const currencyTwo = currencyCode[1].dataset.currencyCode
+  exchangeRate = currencyRatesToday[currencyTwo]
+}
 
-// const result = params(options)
-// https://currencyapi.com/pricing/
-// for (const p of result) {
-//   console.log(p)
-// }
-
-inputField[0].addEventListener('input', () => {
-  inputField[1].value = inputField[0].value
-})
-
-inputField[1].addEventListener('input', () => {
-  inputField[0].value = inputField[1].value
-})
-
+// Получение курсов валют на сегодня
 async function getCurrencyToday(options) {
   gettinDataMessage.classList.remove('hiding')
 
-  const url = `${URL}/latest?${params(options)}`
+  // const url = `${URL}/latest?${params(options)}`
 
-  // const url = 'http://'
+  const url = 'JS/currency_latest.json'
 
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
@@ -74,16 +79,19 @@ async function getCurrencyToday(options) {
     errorMessage.classList.remove('hiding')
     return
   }
-  console.log(currencyRates.rates)
+
+  return currencyRates.rates
 }
 
+// Получение курсов за прошедший год
 async function getCurrencyForYear(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const { startDate, endDate } = datesForDisplayCurrency()
-  const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}${params(
-    options
-  )}`
+  // const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}${params(
+  //   options
+  // )}`
+  const url = 'JS/currency_timeseries.json'
 
   const responseFromServer = await fetch(url).catch(handleError)
   const currencyRates = await responseFromServer.json()
@@ -95,7 +103,8 @@ async function getCurrencyForYear(options) {
     return
   }
 
-  console.log(currencyRates.rates)
+  // console.log(currencyRates.rates)
+  return currencyRates.rates
 }
 
 function datesForDisplayCurrency() {
@@ -127,3 +136,8 @@ function handleError() {
   )
   return resp
 }
+
+// const result = params(options)
+// for (const p of result) {
+//   console.log(p)
+// }
