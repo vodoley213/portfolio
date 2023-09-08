@@ -6,6 +6,7 @@ const currencyCode = document.querySelectorAll('[data-currency-code]')
 const countryFlag = document.querySelectorAll('[data-country-flag]')
 const errorMessage = document.querySelector('#error')
 const gettinDataMessage = document.querySelector('#getting_data')
+const button = document.querySelectorAll('.currency_converter___button')
 let exchangeRate = 1
 
 const URL = 'https://api.exchangerate.host'
@@ -18,7 +19,7 @@ let currencyRatesToday
 let currencyRatesForYear
 
 // 1. Set default currencies and the base in options
-setCurrencies('USD', 'RUB')
+setCurrencies('RUB', 'KZT')
 
 // 2. Загружаем данные с сервера и записываем их в массивы:
 // currencyRatesToday и currencyRatesForYear
@@ -41,6 +42,14 @@ inputField[1].addEventListener('input', () => {
   inputField[0].value = formatNumber(
     toNumber(inputField[1].value) / exchangeRate
   )
+})
+
+button[0].addEventListener('click', () => {
+  console.log('Первая валюта')
+})
+
+button[1].addEventListener('click', () => {
+  console.log('Вторая валюта')
 })
 
 // ----- Additional functions -----
@@ -66,9 +75,9 @@ function setCurrencyRate() {
 async function getCurrencyToday(options) {
   gettinDataMessage.classList.remove('hiding')
 
-  // const url = `${URL}/latest?${params(options)}`
+  const url = `${URL}/latest?${params(options)}`
 
-  const url = 'JS/currency_latest.json'
+  // const url = 'JS/currency_latest.json'
 
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
@@ -88,10 +97,10 @@ async function getCurrencyForYear(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const { startDate, endDate } = datesForDisplayCurrency()
-  // const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}${params(
-  //   options
-  // )}`
-  const url = 'JS/currency_timeseries.json'
+  const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}${params(
+    options
+  )}`
+  // const url = 'JS/currency_timeseries.json'
 
   const responseFromServer = await fetch(url).catch(handleError)
   const currencyRates = await responseFromServer.json()
