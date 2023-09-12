@@ -1,3 +1,10 @@
+  .primary-header[data-new-overlay]::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
 .currency_converter__wrapper {
   display: flex;
   flex-direction: column;
