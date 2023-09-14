@@ -32,7 +32,7 @@ currencyRatesToday = await getCurrencyToday(options)
 console.table(currencyRatesToday)
 
 currencyRatesForYear = await getCurrencyForYear(options)
-console.log(currencyRatesForYear)
+console.table(currencyRatesForYear)
 
 // ratesTodayFromFetch = { ...currencyRatesToday }
 // ratesTodayFromFetch.RUB = 100
@@ -128,6 +128,7 @@ async function getCurrencyToday(options) {
   gettinDataMessage.classList.add('hiding')
   if (currencyRates.code === 400) {
     errorMessage.classList.remove('hiding')
+    console.log('Error from getCurrencyToday')
 
     const localUrl = 'JS/currency_latest.json'
     const savedCurrencyRates = await (await fetch(localUrl)).json()
@@ -151,10 +152,11 @@ async function getCurrencyForYear(options) {
   gettinDataMessage.classList.add('hiding')
   if (currencyRates.code === 400) {
     errorMessage.classList.remove('hiding')
+    console.log('Error from getCurrencyForYear')
 
     const localUrl = 'JS/currency_timeseries.json'
     const savedCurrencyRates = await (await fetch(localUrl)).json()
-    return savedCurrencyRates
+    return savedCurrencyRates.rates
   }
   return currencyRates.rates
 }
