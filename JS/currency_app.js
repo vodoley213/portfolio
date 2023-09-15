@@ -23,7 +23,6 @@ const options = {
 // }
 
 let currencyRatesToday, currencyRatesForYear
-// let ratesTodayFromFetch, RatesForYearFromFetch
 
 // 1. Set default currencies and the base in options
 let currencyOne = 'USD'
@@ -34,20 +33,17 @@ setCurrencies(currencyOne, currencyTwo)
 // currencyRatesToday и currencyRatesForYear
 
 currencyRatesToday = await getCurrencyToday(options)
-console.table(currencyRatesToday)
-
 currencyRatesForYear = await getCurrencyForYear(options)
-console.table(currencyRatesForYear)
-
-// ratesTodayFromFetch = { ...currencyRatesToday }
-// ratesTodayFromFetch.RUB = 100
-// console.log(currencyRatesToday)
-// console.log(ratesTodayFromFetch)
+const currencyDatesForYear = Object.values(currencyRatesForYear)
 
 // 3. Устанавливаем курсы валют в зивисимости от выбранных валют
 // setCurrencyRate()
 
 setCurrencyRate()
+
+// 4. График курса валют для дефолтных USD и RUB
+let currencyChart
+drawChart()
 
 inputField[0].addEventListener('input', setNumberInputField1)
 inputField[1].addEventListener('input', setNumberInputField0)
@@ -76,6 +72,8 @@ popupList[0].addEventListener('click', e => {
     setCurrencies(currencyOne, currencyTwo)
     setCurrencyRate()
     setNumberInputField1()
+    updateValuesForChart()
+    currencyChart.update()
   }
 })
 
@@ -86,21 +84,17 @@ popupList[1].addEventListener('click', e => {
     setCurrencies(currencyOne, currencyTwo)
     setCurrencyRate()
     setNumberInputField0()
+    updateValuesForChart()
+    currencyChart.update()
   }
 })
 
-// График курса валют
-drawChart()
+// ----- Additional functions -----
 
 function drawChart() {
   const daysUnformatted = Object.keys(currencyRatesForYear)
   const days = daysUnformatted.map(formatDate)
-  const rates = Object.values(currencyRatesForYear).map(dailyRate =>
-    dailyRate['RUB'].toFixed(2)
-  )
-
-  console.log(currencyOne, currencyTwo)
-  console.log(rates)
+  const rates = setValuesForChart()
 
   const ctx = document.getElementById('annual_course')
 
@@ -149,14 +143,23 @@ function drawChart() {
     },
   }
 
-  new Chart(ctx, {
+  currencyChart = new Chart(ctx, {
     type: 'line',
     data,
     options,
   })
 }
 
-// ----- Additional functions -----
+function updateValuesForChart() {
+  currencyChart.data.datasets[0].data = setValuesForChart()
+  currencyChart.data.datasets[0].label = `Курс ${currencyOne} / ${currencyTwo}`
+}
+
+function setValuesForChart() {
+  return currencyDatesForYear.map(dailyRate => {
+    return (dailyRate[currencyTwo] / dailyRate[currencyOne]).toFixed(2)
+  })
+}
 
 function formatDate(dayUnformatted) {
   return new Intl.DateTimeFormat().format(Date.parse(dayUnformatted))
@@ -197,7 +200,6 @@ async function getCurrencyToday(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const url = `${URL}/latest?${params(options)}`
-  console.log(url)
 
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
@@ -210,8 +212,6 @@ async function getCurrencyToday(options) {
     const savedCurrencyRates = await (await fetch(localUrl)).json()
     return savedCurrencyRates.rates
   }
-  console.log('Получилось получить TODAY данные с сервера')
-  console.log(currencyRates.rates)
   return currencyRates.rates
 }
 
@@ -220,12 +220,9 @@ async function getCurrencyForYear(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const { startDate, endDate } = datesForDisplayCurrency()
-  // console.log('startDate: ', startDate, 'endDate: ', endDate)
   const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}&${params(
     options
   )}`
-
-  console.log(url)
 
   const responseFromServer = await fetch(url).catch(handleError)
   const currencyRates = await responseFromServer.json()
@@ -239,7 +236,6 @@ async function getCurrencyForYear(options) {
     const savedCurrencyRates = await (await fetch(localUrl)).json()
     return savedCurrencyRates.rates
   }
-  console.log('Получилось получить Year данные с сервера')
   return currencyRates.rates
 }
 
@@ -287,5 +283,3 @@ function closeAllPopupsAndOverlay() {
   popupList[1].classList.add('hiding')
   header.removeAttribute('data-new-overlay')
 }
-
-
