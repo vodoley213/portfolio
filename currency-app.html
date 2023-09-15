@@ -12,6 +12,7 @@
 
     <script type="module" src="script.js?2"></script>
     <script type="module" src="JS/currency_app.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="style.css?3" />
     <link rel="stylesheet" href="CSS/currency.css" />
@@ -121,7 +122,7 @@
       </section>
       <article>
         <section>
-          <div class="container line padding-1st-container">
+          <div class="container padding-1st-container">
             <h2 class="text-center fs-medium-heading">
               Конвертер валют & <br />
               динамика курса за год
@@ -261,68 +262,18 @@
               Получаем данные с сервера...
             </p>
             <p id="error" class="hiding text-center blink_me text-accent">
-              Нет ответа от сервера.... </br>Загружены старые курсы валют
+              Нет ответа от сервера.... </br><span class="text-body">Загружены старые курсы валют</span>
             </p>
           </div>
         </section>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt
-          velit corrupti dolore, blanditiis quidem similique illum illo
-          obcaecati id? Quia, harum! Beatae deserunt omnis debitis aspernatur
-          temporibus voluptatem vero. Quos qui sequi tempore officiis odio
-          delectus earum, laudantium fugiat, perspiciatis ipsa libero
-          perferendis velit! Non, cumque. Repellendus possimus quidem unde
-          placeat corporis facilis ducimus voluptas ipsam magni facere. Id
-          architecto ipsum quaerat mollitia sint incidunt vero placeat, dicta
-          enim totam ea dolor error est perferendis amet eveniet, iusto minus
-          fugit, aut earum! Odio debitis numquam assumenda reprehenderit vero
-          dolor facilis eaque perspiciatis repellat vitae explicabo blanditiis
-          sed voluptatem ipsum veritatis voluptas nihil, quo aliquam quos ut?
-          Inventore iste hic quia quos? Omnis vitae labore totam doloribus
-          adipisci iste veritatis quos consequuntur sunt voluptate, aliquam rem
-          pariatur optio unde delectus ut quo necessitatibus dolorum dicta
-          quidem nemo ad, et corrupti! Dolore velit dignissimos laudantium
-          numquam commodi neque, aut magni natus porro tenetur dolorum cum vitae
-          explicabo temporibus dolores, eveniet magnam eos eius quae quas?
-          Nostrum pariatur aliquid tempore reprehenderit animi repellat
-          reiciendis, veritatis et iure ratione cumque corrupti quia tempora
-          eligendi beatae, consequuntur corporis quidem neque quae harum
-          molestias commodi recusandae. Repudiandae, doloribus et. Non numquam
-          cum unde perferendis, aliquid repellat laborum ad harum voluptate
-          quod! Quibusdam, quo rem modi deleniti exercitationem qui quaerat quas
-          ab labore reiciendis obcaecati sunt nemo, unde placeat rerum
-          temporibus dolores ut! Ut nesciunt nam quo praesentium eveniet amet,
-          qui veniam explicabo suscipit ipsum, earum tempore, hic quidem in
-          totam odit corporis et autem natus. Magnam molestiae distinctio quia
-          quos reprehenderit tempora perferendis id voluptate ratione, explicabo
-          quod aperiam ad perspiciatis aut at eos repudiandae sapiente possimus.
-          Temporibus corporis libero ratione atque quis, consequuntur, omnis
-          minus nam deleniti beatae provident explicabo doloremque voluptates
-          assumenda possimus unde, dicta praesentium debitis sint est dolorum
-          molestiae eligendi! Adipisci ullam vel similique consectetur culpa
-          tempore distinctio necessitatibus vero soluta at alias itaque,
-          asperiores voluptas, fugiat, modi quis placeat quam deleniti vitae
-          assumenda tenetur perspiciatis. Dolorem consequuntur assumenda
-          aspernatur, quae, aliquid sapiente reiciendis esse accusantium fugiat,
-          veniam exercitationem. Blanditiis eaque id a ipsam labore, ea harum
-          est minima temporibus expedita, voluptatem odit. Vel nihil voluptates,
-          sunt quidem praesentium dolorum harum eaque voluptatibus, tempore
-          voluptatum laudantium quasi natus molestiae accusamus. Rerum
-          exercitationem corporis mollitia aliquid aliquam, doloremque nulla
-          odit velit sit autem dolor eius amet deleniti fuga voluptatibus quas
-          consectetur id impedit architecto laboriosam laborum. Odio architecto
-          doloremque at eius libero, fugit facilis nam ex saepe aliquam iusto
-          et, nesciunt rem ab ipsum vero magni quo deserunt temporibus aut autem
-          modi deleniti? Voluptatem dolores repellendus doloremque inventore
-          culpa nemo rem repellat similique consequatur omnis dolorum minus fuga
-          quos quasi architecto maiores nam accusamus blanditiis, debitis
-          consectetur officiis iure possimus ad! Quibusdam tempora alias nemo
-          incidunt tempore laborum cum eos itaque! Quis atque dolorem pariatur
-          cumque soluta libero sit laboriosam sint dolorum sequi facere aperiam,
-          enim quia minus eaque adipisci praesentium tenetur doloribus a,
-          impedit facilis repellat ab! Laudantium, consequatur quo totam ipsa
-          aliquid enim rerum ut ipsam quos error itaque. Eum, voluptate!
-        </p>
+    <section>
+      <div class="container line padding-1st-container">
+                    <!-- <h2 class="text-center fs-medium-heading">
+              Динамика курса за год
+            </h2> -->
+      <canvas id="annual_course">Годовой курс</canvas>
+      </div>
+    </section>
       </article>
 
       <!-- footer -->

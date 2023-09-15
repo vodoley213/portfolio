@@ -13,9 +13,14 @@ let exchangeRate = 1
 
 const URL = 'https://api.exchangerate.host'
 const options = {
+  symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
   base: 'USD',
-  symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF', // Швейцария - CHF
 }
+
+// const result = params(options)
+// for (const p of result) {
+//   console.log(p)
+// }
 
 let currencyRatesToday, currencyRatesForYear
 // let ratesTodayFromFetch, RatesForYearFromFetch
@@ -78,14 +83,84 @@ popupList[1].addEventListener('click', e => {
   const isClickedLi = e.target.closest('li')
   if (isClickedLi) {
     currencyTwo = isClickedLi.dataset.currency
-    console.log(currencyTwo)
     setCurrencies(currencyOne, currencyTwo)
     setCurrencyRate()
     setNumberInputField0()
   }
 })
 
+// График курса валют
+drawChart()
+
+function drawChart() {
+  const daysUnformatted = Object.keys(currencyRatesForYear)
+  const days = daysUnformatted.map(formatDate)
+  const rates = Object.values(currencyRatesForYear).map(dailyRate =>
+    dailyRate['RUB'].toFixed(2)
+  )
+
+  console.log(currencyOne, currencyTwo)
+  console.log(rates)
+
+  const ctx = document.getElementById('annual_course')
+
+  Chart.defaults.font.size = 18
+  Chart.defaults.color = '#ccced0'
+
+  const data = {
+    labels: days,
+    datasets: [
+      {
+        label: `Курс ${currencyOne} / ${currencyTwo}`,
+        data: rates,
+        backgroundColor: 'rgba(245, 192, 41, 0.3)',
+        borderColor: '#f5c029',
+        borderWidth: 1,
+        fill: true,
+      },
+    ],
+  }
+
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: false,
+      },
+      x: {
+        ticks: {
+          callback: function (value, index, values) {
+            // console.log(data.labels[index])
+            if (index % 45 === 0 || index === data.length - 1)
+              return data.labels[index]
+          },
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: true,
+        intersect: false,
+        displayColors: false,
+        padding: 12,
+      },
+    },
+  }
+
+  new Chart(ctx, {
+    type: 'line',
+    data,
+    options,
+  })
+}
+
 // ----- Additional functions -----
+
+function formatDate(dayUnformatted) {
+  return new Intl.DateTimeFormat().format(Date.parse(dayUnformatted))
+}
 
 function setCurrencies(currencyOne, currencyTwo) {
   options.base = currencyOne
@@ -122,6 +197,7 @@ async function getCurrencyToday(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const url = `${URL}/latest?${params(options)}`
+  console.log(url)
 
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
@@ -134,6 +210,8 @@ async function getCurrencyToday(options) {
     const savedCurrencyRates = await (await fetch(localUrl)).json()
     return savedCurrencyRates.rates
   }
+  console.log('Получилось получить TODAY данные с сервера')
+  console.log(currencyRates.rates)
   return currencyRates.rates
 }
 
@@ -142,9 +220,12 @@ async function getCurrencyForYear(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const { startDate, endDate } = datesForDisplayCurrency()
-  const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}${params(
+  // console.log('startDate: ', startDate, 'endDate: ', endDate)
+  const url = `${URL}/timeseries?start_date=${startDate}&end_date=${endDate}&${params(
     options
   )}`
+
+  console.log(url)
 
   const responseFromServer = await fetch(url).catch(handleError)
   const currencyRates = await responseFromServer.json()
@@ -158,13 +239,15 @@ async function getCurrencyForYear(options) {
     const savedCurrencyRates = await (await fetch(localUrl)).json()
     return savedCurrencyRates.rates
   }
+  console.log('Получилось получить Year данные с сервера')
   return currencyRates.rates
 }
 
 function datesForDisplayCurrency() {
   const dateNow = new Date()
+
   let date = dateNow.getDate()
-  let month = dateNow.getMonth()
+  let month = dateNow.getMonth() + 1
   const year = dateNow.getFullYear()
 
   if (date.toString().length === 1) date = '0' + date
@@ -205,7 +288,4 @@ function closeAllPopupsAndOverlay() {
   header.removeAttribute('data-new-overlay')
 }
 
-// const result = params(options)
-// for (const p of result) {
-//   console.log(p)
-// }
+
