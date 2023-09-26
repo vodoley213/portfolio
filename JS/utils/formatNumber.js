@@ -8,6 +8,7 @@ export function formatNumber(amount) {
 }
 
 export function toNumber(string) {
+  // убаляем пробелы, заменяем запятую на точку, преобразуем троку в число
   const re = /\s/g
   string = string.replace(',', '.').replace(re, '')
   return +string

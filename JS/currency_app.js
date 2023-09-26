@@ -17,11 +17,6 @@ const options = {
   base: 'USD',
 }
 
-// const result = params(options)
-// for (const p of result) {
-//   console.log(p)
-// }
-
 let currencyRatesToday, currencyRatesForYear
 
 // 1. Set default currencies and the base in options
@@ -123,7 +118,6 @@ function drawChart() {
       x: {
         ticks: {
           callback: function (value, index, values) {
-            // console.log(data.labels[index])
             if (index % 45 === 0 || index === data.length - 1)
               return data.labels[index]
           },
@@ -171,14 +165,11 @@ function setCurrencies(currencyOne, currencyTwo) {
   currencyCode[1].dataset.currencyCode = currencyTwo
   currencyCode[0].textContent = currencyOne
   currencyCode[1].textContent = currencyTwo
-  currencyCode[0].textContent = currencyOne
-  currencyCode[1].textContent = currencyTwo
   countryFlag[0].src = `images/svg/${CURRENCY_CODES[currencyOne]}`
   countryFlag[1].src = `images/svg/${CURRENCY_CODES[currencyTwo]}`
 }
 
 function setCurrencyRate() {
-  // const currencyTwo = currencyCode[1].dataset.currencyCode
   exchangeRate =
     currencyRatesToday[currencyTwo] / currencyRatesToday[currencyOne]
 }
@@ -256,7 +247,6 @@ function datesForDisplayCurrency() {
 
 function params(options) {
   return new URLSearchParams({
-    // access_key: 'b38bf2ea00fa7b7ccca6cb92a99ca19b',
     ...options,
   })
 }
