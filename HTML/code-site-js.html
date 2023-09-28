@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../style.css?2" />
     <link rel="stylesheet" href="../assets/highlight/seti-ui.min.css" />
 
-    <title>Код parsing-weather-API.js приложения Прогноза погоды</title>
+    <title>Script.js этого сайта-портфолио</title>
   </head>
   <body>
     <div data-sticky-parent="">
@@ -53,6 +53,7 @@
                   <svg class="nav-icons"><use href="#menu-about"></use></svg>
                   <a href="../index.html#about">Обо мне</a>
                 </li>
+                <!-- <li><svg class="nav-icons"><use href="#menu-resume" ></use></svg><a href="#resume">Резюме</a></li> -->
                 <li>
                   <svg class="nav-icons">
                     <use href="#menu-portfolio"></use>
@@ -80,43 +81,72 @@
           <div class="container line">
             <a name="about"
               ><h2 class="text-center fs-medium-heading padding-block-600">
-                Код parsing-weather-API.js приложения Прогноза погоды
+                Script.js этого сайта-портфолио
               </h2></a
             >
             <pre>
         <code>
-export function getCurrentWeather({ current_weather, daily }) {
-  const {
-    temperature: currentTemp,
-    windspeed: windSpeed,
-    weathercode: iconCode,
-  } = current_weather
-  const {
-    temperature_2m_max: [maxTemp],
-    temperature_2m_min: [minTemp],
-    uv_index_max: [UVindexMax],
-    sunset: [sunset_time],
-  } = daily
+export const primaryHeader = document.querySelector('.primary-header')
+const navToggle = document.querySelector('.mobile-nav-toggle')
+const primaryNav = document.querySelector('.primary-navigation')
+export const iconHamburger = document.querySelector('.icon-hamburger')
 
-  return {
-    currentTemp: Math.round(currentTemp),
-    maxTemp: Math.round(maxTemp),
-    minTemp: Math.round(minTemp),
-    windSpeed: Math.round(windSpeed),
-    iconCode,
-    UVindexMax,
-    sunset_time,
+const backButton = document.querySelector('.button-arrow')
+const scrollWatcher = document.createElement('div')
+const blurredImg = document.querySelectorAll('.blurred-img')
+
+// Вставляем пустой див для IntersectionObserver
+scrollWatcher.dataset.scrollWatcher = ''
+primaryHeader.before(scrollWatcher)
+
+navToggle.addEventListener('click', () => {
+  primaryNav.hasAttribute('data-visible')
+    ? navToggle.setAttribute('aria-expanded', false)
+    : navToggle.setAttribute('aria-expanded', true)
+  primaryHeader.dataset.overlay = ''
+  primaryNav.dataset.visible = ''
+  iconHamburger.classList.add('hide')
+})
+
+primaryNav.addEventListener('click', e => {
+  if (e.target.matches('a')) closeNavBars()
+})
+
+document.addEventListener('click', e => {
+  if (e.target.matches('[data-overlay]')) closeNavBars()
+})
+
+backButton?.addEventListener('click', () => {
+  history.back()
+})
+
+const navObserver = new IntersectionObserver(entries => {
+  primaryHeader.classList.toggle('sticking-nav', !entries[0].isIntersecting)
+})
+
+navObserver.observe(scrollWatcher)
+
+// Lazy load and blur
+blurredImg.forEach(div => {
+  const img = div.querySelector('img')
+
+  function loaded() {
+    div.classList.add('loaded')
   }
+
+  if (img.complete) {
+    loaded()
+  } else {
+    img.addEventListener('load', loaded)
+  }
+})
+
+function closeNavBars() {
+  primaryNav.removeAttribute('data-visible')
+  iconHamburger.classList.remove('hide')
+  primaryHeader.removeAttribute('data-overlay')
 }
-export function getWeatherForecast({ daily }) {
-  return daily.time.map((time, index) => {
-    return {
-      timestampJS: time * 1000,
-      iconCode: daily.weathercode[index],
-      maxTemp: Math.round(daily.temperature_2m_max[index]),
-    }
-  })
-}
+
         </code>
         </pre>
           </div>

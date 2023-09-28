@@ -72,7 +72,7 @@
         </div>
       </header>
       <main>
-        <section class="">
+        <section>
           <div class="container line padding-1st-container">
             <div class="stacked">
               <div
@@ -125,7 +125,7 @@
           </div>
         </section>
         <!-- About me -->
-        <section class="">
+        <section>
           <div class="container line padding-block-container">
             <a
               ><h2 id="about" class="scroll-margin-top fs-big-heading">
@@ -204,8 +204,8 @@
               JavaScript-приложений, а также на таких известных платформах, как
               <a href="https://cssbattle.dev/">CSSBattle</a>,
               <a href="https://www.hackerrank.com/">HackerRank</a>,
-              <a href="https://leetcode.com/">LeetCode</a>. Также данный
-              портфолио-сайт был создан с нуля
+              <a href="https://leetcode.com/">LeetCode</a>. Также с нуля был
+              создан этот портфолио-сайт.
             </p>
             <div class="grid-cells padding-block-600">
               <div>
@@ -314,6 +314,7 @@
             </div>
           </div>
         </section>
+        <!-- Portfolio section -->
         <section>
           <div class="container line padding-block-container">
             <a
@@ -343,10 +344,11 @@
                     </div>
                     <h3 class="fs-portfolio">Прогноз погоды (JS)</h3>
                     <p class="text-body">
-                      Приложение сделано с использованием CSS grid, адаптивный
-                      дизайн, CSS-переменные. По JavaScript использовано:
-                      модули, HTML-шаблоны (template), Fetch API, Object
-                      Destructuring, Async/await, LocalStorage, Map...
+                      Приложение сделано с использованием CSS grid, CSS flex, адаптивный
+                      дизайн, CSS-переменные.
+                      <span class="text-accent">По JavaScript использовано</span
+                      >: модули, HTML-шаблоны (template), Fetch API, Object
+                      Destructuring, Async/await, Промисы, LocalStorage, Map...
                     </p>
                   </div>
                 </a>
@@ -373,11 +375,11 @@
                       />
                     </div>
                     <h3 class="fs-portfolio">Игра "Питон" (JS)</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Blanditiis consequuntur eum, adipisci at saepe incidunt.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Blanditiis consequuntur eum, adipisci at saepe incidunt.
+                    <p class="text-body">
+                      Игра сделана с использованием CSS grid, адаптивный дизайн,
+                      Mobile First.
+                      <span class="text-accent">По JavaScript использовано</span
+                      >: модули, Object Destructuring, LocalStorage, requestAnimationFrame, Async/await, Промисы, управление клавиатурой и тачскрином.
                     </p>
                   </div>
                 </a>
@@ -403,9 +405,12 @@
                       />
                     </div>
                     <h3 class="fs-portfolio">E-commerce (JS)</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Blanditiis consequuntur eum, adipisci at saepe incidunt.
+                    <p class="text-body">
+                      Приложение сделано (только Frontend) с использованием CSS grid, CSS flex, адаптивный
+                      дизайн, Mobile first.
+                      <span class="text-accent">По JavaScript использовано</span
+                      >: модули, HTML-шаблоны (template), Fetch API, JSON данные, RegEx, Object
+                      Destructuring, Async/await, LocalStorage, кросс-страничная корзина.
                     </p>
                   </div>
                 </a>
@@ -413,42 +418,86 @@
                   <a href="eshop-app.html">Смотреть код</a>
                 </button>
               </div>
+
               <div>
-                <div class="card big-card">
-                  <div>
-                    <!-- <div
-                    class="blurred-img"
-                    style="
-                      background-image: url(images/portfolio_placeholder.jpg);
-                    "
-                  > -->
-                    <img
-                      src="images/portfolio.jpg"
-                      srcset="
-                        images/portfolio_480.jpg  480w,
-                        images/portfolio_800.jpg  800w,
-                        images/portfolio.jpg     1000w
+                <a href="currency-app.html">
+                  <div class="card">
+                    <div
+                      class="blurred-img"
+                      style="
+                        background-image: url(images/exchange_placeholder.jpg);
                       "
-                      loading="lazy"
-                    />
+                    >
+                      <img
+                        src="images/exchange.jpg"
+                        srcset="
+                          images/exchange_480.jpg  480w,
+                          images/exchange_800.jpg  800w,
+                          images/exchange.jpg     1200w
+                        "
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="fs-portfolio">Курсы валют с графиками</h3>
+                    <p class="text-body">
+                      При создании использовались CSS Flexbox, адаптивный
+                      дизайн, Mobile first.
+                      <span class="text-accent">По JavaScript использовано</span
+                      >: модули, Fetch API, Object Destructuring, Async/await,
+                      библиотека Chart.js. Версия с ООП: Классы,
+                      геттеры-сеттеры, приватные поля. Cсылки на коды:
+                    </p>
                   </div>
-                  <h3 class="fs-portfolio">Этот сайт-портфолио</h3>
-                  <p>
-                    При создании использовались CSS Flexbox, CSS Grid,
-                    медиа-запросы, адаптивный дизайн, Mobile first, адаптивные
-                    картинки, SVG-спрайты, Lazy loading, CSS-переменные,
-                    @font-face, IntersectionObserver и прочее. Ниже - ссылки на
-                    исходные коды.
-                  </p>
+                </a>
+                <div class="buttons-in-row">
+                  <button class="fw-bold text-white">
+                    <a href="currency-app.html">Обычный JS код</a>
+                  </button>
+                  <button class="fw-bold text-white">
+                    <a href="currency-app.html">ООП JS код</a>
+                  </button>
                 </div>
+              </div>
+
+              <div>
+                <a href="index.html">
+                  <div class="card">
+                    <div
+                      class="blurred-img"
+                      style="
+                        background-image: url(images/portfolio_placeholder.jpg);
+                      "
+                    >
+                      <img
+                        src="images/portfolio.jpg"
+                        srcset="
+                          images/portfolio_480.jpg  480w,
+                          images/portfolio_800.jpg  800w,
+                          images/portfolio.jpg     1200w
+                        "
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 class="fs-portfolio">Этот сайт-портфолио</h3>
+                    <p class="text-body">
+                      При создании использовались CSS Flexbox, CSS Grid,
+                      медиа-запросы, адаптивный дизайн, Mobile first, адаптивные
+                      картинки, SVG-спрайты, Lazy loading, CSS-переменные,
+                      @font-face, IntersectionObserver и прочее. Cсылки на коды:
+                    </p>
+                  </div>
+                </a>
                 <div class="buttons-in-row">
                   <button class="fw-bold text-white">HTML код</button>
                   <button class="fw-bold text-white">
-                    <a href="code-site-css.html">CSS код</a>
+                    <a href="HTML/code-site-css.html">CSS код</a>
                   </button>
-                  <button class="fw-bold text-white">JS код</button>
+                  <button class="fw-bold text-white">
+                    <a href="HTML/code-site-js.html">JS код</a>
+                  </button>
                 </div>
               </div>
+
               <div>
                 <div class="card">
                   <div
@@ -466,7 +515,7 @@
                     />
                   </div>
                   <h3 class="fs-portfolio">GitHub</h3>
-                  <p>
+                  <p class="text-body">
                     В репозитории можно найти исходные коды решения задач с
                     известных платформ, таких как как
                     <a href="https://www.codewars.com/">CodeWars</a>,
@@ -484,7 +533,7 @@
           </div>
         </section>
         <!-- Blog section -->
-        <section class="">
+        <section>
           <div class="container line padding-block-container">
             <a
               ><h2 id="blog" class="scroll-margin-top fs-big-heading">

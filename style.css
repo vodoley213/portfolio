@@ -795,6 +795,7 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
 .buttons-in-row {
   display: flex;
   gap: var(--size-400);
+  align-items: center;
 }
 
 .portfolio-grid > div:nth-child(1) {
@@ -807,9 +808,12 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
   grid-area: commerce;
 }
 .portfolio-grid > div:nth-child(4) {
-  grid-area: portfolio;
+  grid-area: exchange;
 }
 .portfolio-grid > div:nth-child(5) {
+  grid-area: portfolio;
+}
+.portfolio-grid > div:nth-child(6) {
   grid-area: loveopium;
 }
 
@@ -817,7 +821,7 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
   .portfolio-grid {
     grid-template-areas:
       'api game commerce'
-      'portfolio portfolio loveopium';
+      'exchange portfolio loveopium';
   }
 }
 

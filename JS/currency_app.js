@@ -29,6 +29,7 @@ setCurrencies(currencyOne, currencyTwo)
 
 currencyRatesToday = await getCurrencyToday(options)
 currencyRatesForYear = await getCurrencyForYear(options)
+
 const currencyDatesForYear = Object.values(currencyRatesForYear)
 
 // 3. Устанавливаем курсы валют в зивисимости от выбранных валют
@@ -195,7 +196,7 @@ async function getCurrencyToday(options) {
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
   gettinDataMessage.classList.add('hiding')
-  if (currencyRates.code === 400) {
+  if (currencyRates.code === 400 || currencyRates.success === false) {
     errorMessage.classList.remove('hiding')
     console.log('Error from getCurrencyToday')
 
@@ -219,7 +220,7 @@ async function getCurrencyForYear(options) {
   const currencyRates = await responseFromServer.json()
 
   gettinDataMessage.classList.add('hiding')
-  if (currencyRates.code === 400) {
+  if (currencyRates.code === 400|| currencyRates.success === false) {
     errorMessage.classList.remove('hiding')
     console.log('Error from getCurrencyForYear')
 
