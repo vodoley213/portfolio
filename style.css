@@ -252,6 +252,10 @@ svg {
   padding-block: var(--size-600);
 }
 
+.padding-bottom-400 {
+  padding-bottom: var(--size-400);
+}
+
 .padding-1st-container {
   padding-top: var(--size-padding-top-1st-container);
   padding-bottom: var(--size-padding-container);
@@ -413,8 +417,8 @@ button a:hover {
   color: var(--color-text-white);
 }
 
-button:hover:not(.mobile-nav-toggle,.currency_converter___button),
-button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
+button:hover:not(.mobile-nav-toggle, .currency_converter___button),
+button:focus-visible:not(.mobile-nav-toggle, .currency_converter___button) {
   background-color: var(--color-outline-on-dark);
   border: 2px solid var(--color-outline-on-dark);
 }
@@ -704,6 +708,61 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
   }
 }
 
+.skif-image {
+  max-width: 300px;
+}
+@media (min-width: 46em) {
+  .skif-image {
+    max-width: 350px;
+  }
+}
+@media (min-width: 67em) {
+  .skif-image {
+    max-width: 500px;
+  }
+}
+
+.tools-in-row {
+  display: flex;
+  /* justify-content: center; */
+  gap: var(--size-400);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.tools-in-row > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tools-in-row p {
+  margin-top: 0;
+}
+
+.tools-in-row svg {
+  flex-shrink: 0;
+  width: var(--size-700);
+  aspect-ratio: 6/7;
+  fill: var(--color-outline-on-dark);
+  /* color: var(--color-outline-on-dark); */
+}
+
+@media (min-width: 46em) {
+  .tools-in-row svg {
+    width: var(--size-800);
+  }
+}
+
+.certificates {
+  display: grid;
+  gap: var(--size-400);
+}
+
+@media (min-width: 46em) {
+  .certificates {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .grid-cells {
   display: grid;
   justify-content: center;
@@ -725,7 +784,8 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
   color: var(--color-outline-on-dark);
 }
 
-.grid-cells svg:hover {
+.grid-cells svg:hover,
+.tools-in-row svg:hover {
   fill: var(--color-main-accent);
   color: var(--color-main-accent);
 }
@@ -748,6 +808,7 @@ button:focus-visible:not(.mobile-nav-toggle,.currency_converter___button) {
     'api'
     'game'
     'commerce'
+    'exchange'
     'portfolio'
     'loveopium';
   gap: 1rem;
