@@ -7,7 +7,7 @@ itemsQtyInCartIcon()
 
 const cartItemTemplate = document.querySelector('#item-in-cart-template')
 
-const URL = '/portfoliowebsite/JS/plants.json'
+const URL = '/JS/plants.json'
 const responseFromUrl = await fetch(URL)
 const shoppingItems = await responseFromUrl.json()
 

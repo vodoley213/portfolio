@@ -7,6 +7,10 @@ const backButton = document.querySelector('.button-arrow')
 const scrollWatcher = document.createElement('div')
 const blurredImg = document.querySelectorAll('.blurred-img')
 
+const currentYearSlot = document.querySelector('[data-current-year]')
+const currentYear = new Date().getFullYear()
+currentYearSlot.textContent = currentYear
+
 // Вставляем пустой див для IntersectionObserver
 scrollWatcher.dataset.scrollWatcher = ''
 primaryHeader.before(scrollWatcher)

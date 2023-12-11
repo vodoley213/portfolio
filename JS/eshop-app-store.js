@@ -4,7 +4,7 @@ import { addTocart } from './eshop-app-cart.js'
 const storeItemTemplate = document.querySelector('#shopping-card-template')
 const itemsBlock = document.querySelector('#products-block')
 
-const URL = '/portfoliowebsite/JS/plants.json'
+const URL = '/JS/plants.json'
 const responseFromUrl = await fetch(URL)
 export const shoppingItems = await responseFromUrl.json()
 

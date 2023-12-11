@@ -75,7 +75,7 @@
             <!-- Иконка корзины -->
             <div type="button" id="shoping-cart-icon" class="shoping-cart">
               <svg class="shopping-cart__icon">
-                <use href="#cart"></use>
+                <use href="../../sprite.svg#cart"></use>
               </svg>
               <div data-cart-quantity class="shoping-cart__quantity"></div>
             </div>
@@ -107,11 +107,14 @@
           <div class="container line padding-1st-container-top">
             <p>
               Приложение магазина садовых растений E-commerce сделано с
-              использованием: CSS grid, CSS flex, медиа-запросы, адаптивный
-              дизайн, Mobile first, CSS-переменные, @font-face. По
-              <span class="text-accent">JavaScript</span> использовано: модули,
-              работа с HTML-шаблонами (template), Fetch API, async/ await,
-              LocalStorage.
+              использованием HTML5, CSS3, JavaScript.
+              <span class="text-accent">По CSS использовано</span>: CSS Grid
+              layout, CSS Flexbox, медиа-запросы, адаптивный дизайн, Mobile
+              first, CSS-переменные, @font-face.
+              <span class="text-accent">По JavaScript использовано</span>:
+              модули, JSON данные, работа с HTML-шаблонами (template), Fetch
+              API, Async/ await, LocalStorage, RegEx, Object Destructuring,
+              кросс-страничная корзина.
             </p>
             <p>Коды JavaScript:</p>
             <div class="buttons-in-row fs-footer wrap margin-top-400">
@@ -128,7 +131,7 @@
                 <a href="../code-eshop-app-store.html">eshop-app-store.js</a>
               </button>
               <button class="fw-bold text-white">
-                <a href="https://github.com/vodoley213">GitHub</a>
+                <a href="https://github.com/vodoley213/portfolio">GitHub</a>
               </button>
             </div>
             <img
@@ -223,12 +226,11 @@
       <div class="container">
         <div class="footer-columns">
           <div>
-            © 2023
+            © <span data-current-year></span>
             <span class="fw-bold text-accent">The portfolio website</span> by
             Vladislav V.
           </div>
           <nav class="footer-nav">
-            <!-- TODO: Поправить ссылки -->
             <ul aria-label="Footer" role="list" class="nav-list-footer">
               <li><a href="../../index.html">Домой</a></li>
               <li><a href="../../index.html#about">Обо мне</a></li>

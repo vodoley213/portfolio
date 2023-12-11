@@ -35,7 +35,7 @@
             aria-expanded="false"
           >
             <svg class="icon-hamburger" aria-hidden="true">
-              <use href="#icon-hamburger"></use>
+              <use href="sprite.svg#icon-hamburger"></use>
             </svg>
             <!-- <svg class="icon-close hide" aria-hidden="true">
               <use href="#icon-close"></use>
@@ -45,23 +45,33 @@
           <nav class="primary-navigation" id="primary-navigation">
             <ul aria-label="Primary" role="list" class="nav-list">
               <li>
-                <svg class="nav-icons"><use href="#menu-home"></use></svg>
+                <svg class="nav-icons">
+                  <use href="sprite.svg#menu-home"></use>
+                </svg>
                 <a href="index.html">Домой</a>
               </li>
               <li>
-                <svg class="nav-icons"><use href="#menu-about"></use></svg>
+                <svg class="nav-icons">
+                  <use href="sprite.svg#menu-about"></use>
+                </svg>
                 <a href="index.html#about">Обо мне</a>
               </li>
               <li>
-                <svg class="nav-icons"><use href="#menu-portfolio"></use></svg>
+                <svg class="nav-icons">
+                  <use href="sprite.svg#menu-portfolio"></use>
+                </svg>
                 <a href="index.html#portfolio">Портфолио</a>
               </li>
               <li>
-                <svg class="nav-icons"><use href="#menu-blog"></use></svg>
+                <svg class="nav-icons">
+                  <use href="sprite.svg#menu-blog"></use>
+                </svg>
                 <a href="./index.html#blog">Блог</a>
               </li>
               <li>
-                <svg class="nav-icons"><use href="#menu-contacts"></use></svg>
+                <svg class="nav-icons">
+                  <use href="sprite.svg#menu-contacts"></use>
+                </svg>
                 <a href="./index.html#contacts">Контакты</a>
               </li>
             </ul>
@@ -75,13 +85,15 @@
         <div class="container line padding-1st-container">
           <div class="snake-grid">
             <div>
-              Игра змейка или питон. Работает на компьютере или мобильных
-              устройствах. Сделано с использованием CSS grid, CSS flex,
-              медиа-запросы, Mobile first, CSS-переменные. По
-              <span class="text-accent">JavaScript</span> использовано: модули,
-              requestAnimationFrame, async/await. Управление питоном: стрелки
-              ↑→↓←, ускорение/замедление питона: клавиши +/-. Управление на
-              смартфоне: тапы по сторонам экрана.
+              Игра змейка или питон. Управление с клавиатуры и тачскрина
+              смартфона. Управление питоном: стрелки ↑→↓←, ускорение/замедление
+              питона: клавиши +/-. Управление на смартфоне: тапы по сторонам
+              экрана. Сделано с использованием HTML5, CSS3, JavaScript.
+              <span class="text-accent">По CSS использовано</span>: CSS Grid
+              layout, CSS Flexbox, медиа-запросы, Mobile first, CSS-переменные.
+              <span class="text-accent">По JavaScript использовано</span>:
+              модули, requestAnimationFrame, Async/await, Object Destructuring,
+              LocalStorage.
             </div>
             <img src="./images/svg/snake.svg" alt="" />
           </div>
@@ -114,7 +126,7 @@
       <section>
         <div class="container line padding-1st-container">
           <svg data-fullscreen-icon class="margin-bottom-600 fullscreen-icon">
-            <use href="#fullscreen"></use>
+            <use href="sprite.svg#fullscreen"></use>
           </svg>
           <!-- <div id="score" class="score">
             <div class="fs-big-heading"><span class="fw-bold">Длина</span> <span data-snake-length-count>5</span></div>
@@ -136,12 +148,11 @@
         <div class="container">
           <div class="footer-columns">
             <div>
-              © 2023
+              © <span data-current-year></span>
               <span class="fw-bold text-accent">The portfolio website</span> by
               Vladislav V.
             </div>
             <nav class="footer-nav">
-              <!-- TODO: Поправить ссылки -->
               <ul aria-label="Footer" role="list" class="nav-list-footer">
                 <li><a href="index.html">Домой</a></li>
                 <li><a href="index.html#about">Обо мне</a></li>
@@ -155,7 +166,7 @@
       </footer>
 
       <!-- SVG sprite -->
-      <svg width="0" height="0" class="hidden">
+      <!-- <svg width="0" height="0" class="hidden">
         <symbol viewBox="0 0 48 48" id="fullscreen">
           <g>
             <polygon
@@ -248,7 +259,7 @@
             d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"
           ></path>
         </symbol>
-      </svg>
+      </svg> -->
     </main>
   </body>
 </html>
