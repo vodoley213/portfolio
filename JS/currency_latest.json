@@ -1,1 +1,18 @@
-{"motd":{"msg":"If you or your company use this project or like what we doing, please consider backing us so we can continue maintaining and evolving this project.","url":"https://exchangerate.host/#/donate"},"success":true,"base":"USD","date":"2023-09-14","rates":{"CAD":1.353848,"CHF":0.892547,"EUR":0.930697,"GBP":0.800669,"KZT":465.837961,"RUB":96.650658,"TRY":26.927571,"USD":1}}
+{
+  "success": true,
+  "terms": "https://fxratesapi.com/legal/terms-conditions",
+  "privacy": "https://fxratesapi.com/legal/privacy-policy",
+  "timestamp": 1702482780,
+  "date": "2023-12-13T15:53:00.000Z",
+  "base": "USD",
+  "rates": {
+    "CAD": 1.3576201894,
+    "CHF": 0.8763601708,
+    "EUR": 0.9266401755,
+    "GBP": 0.7984701206,
+    "KZT": 457.0597834147,
+    "RUB": 89.7939209526,
+    "TRY": 29.0523753915,
+    "USD": 1
+  }
+}

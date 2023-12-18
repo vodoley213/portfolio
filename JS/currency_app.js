@@ -11,10 +11,21 @@ const button = document.querySelectorAll('[data-popup-button]')
 const popupList = [...document.querySelectorAll('[data-popup-list]')]
 let exchangeRate = 1
 
-const URL = 'https://api.exchangerate.host'
+// const URL = 'https://api.exchangerate.host'
+// const options = {
+//   symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
+//   base: 'USD',
+// }
+
+const URL = 'https://api.fxratesapi.com'
 const options = {
-  symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
-  base: 'USD',
+  currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
+  format: 'json',
+}
+const optionsTimeseries = {
+  currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
+  base: 'EUR',
+  format: 'json',
 }
 
 let currencyRatesToday, currencyRatesForYear
@@ -28,7 +39,15 @@ setCurrencies(currencyOne, currencyTwo)
 // currencyRatesToday и currencyRatesForYear
 
 currencyRatesToday = await getCurrencyToday(options)
-currencyRatesForYear = await getCurrencyForYear(options)
+currencyRatesForYear = await getCurrencyForYear(optionsTimeseries)
+
+// Переворачиваем объект по датам от меньшей к большей
+currencyRatesForYear = Object.keys({ ...currencyRatesForYear })
+  .sort()
+  .reduce((sortedArray, date) => {
+    sortedArray[date] = currencyRatesForYear[date]
+    return sortedArray
+  }, {})
 
 const currencyDatesForYear = Object.values(currencyRatesForYear)
 
@@ -192,6 +211,7 @@ async function getCurrencyToday(options) {
   gettinDataMessage.classList.remove('hiding')
 
   const url = `${URL}/latest?${params(options)}`
+  console.log('url на тудей', url)
 
   const currencyRates = await (await fetch(url).catch(handleError)).json()
 
@@ -216,11 +236,13 @@ async function getCurrencyForYear(options) {
     options
   )}`
 
+  console.log('url на год', url)
+
   const responseFromServer = await fetch(url).catch(handleError)
   const currencyRates = await responseFromServer.json()
 
   gettinDataMessage.classList.add('hiding')
-  if (currencyRates.code === 400|| currencyRates.success === false) {
+  if (currencyRates.code === 400 || currencyRates.success === false) {
     errorMessage.classList.remove('hiding')
     console.log('Error from getCurrencyForYear')
 
@@ -234,9 +256,9 @@ async function getCurrencyForYear(options) {
 function datesForDisplayCurrency() {
   const dateNow = new Date()
 
-  let date = dateNow.getDate()
-  let month = dateNow.getMonth() + 1
-  const year = dateNow.getFullYear()
+  let date = dateNow.getUTCDate()
+  let month = dateNow.getUTCMonth() + 1
+  const year = dateNow.getUTCFullYear()
 
   if (date.toString().length === 1) date = '0' + date
   if (month.toString().length === 1) month = '0' + month
