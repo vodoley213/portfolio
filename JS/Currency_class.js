@@ -50,13 +50,21 @@ export default class Currency {
 
   get options() {
     return {
-      symbols: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
-      base: 'USD',
+      currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
+      format: 'json',
+    }
+  }
+
+  get optionsTimeseries() {
+    return {
+      currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
+      base: 'EUR',
+      format: 'json',
     }
   }
 
   get URL() {
-    return 'https://api.exchangerate.host'
+    return 'https://api.fxratesapi.com'
   }
 
   #params(options) {
@@ -135,7 +143,7 @@ export default class Currency {
     const url = `${
       this.URL
     }/timeseries?start_date=${startDate}&end_date=${endDate}&${this.#params(
-      this.options
+      this.optionsTimeseries
     )}`
 
     const responseFromServer = await fetch(url).catch(this.#handleError)
@@ -150,14 +158,23 @@ export default class Currency {
       this.currencyRatesForYear = savedCurrencyRates.rates
     }
     this.currencyRatesForYear = currencyRates.rates
+
+    // Переворачиваем объект по датам от меньшей к большей
+    
+    this.currencyRatesForYear = Object.keys({ ...this.currencyRatesForYear })
+      .sort()
+      .reduce((sortedArray, date) => {
+        sortedArray[date] = this.currencyRatesForYear[date]
+        return sortedArray
+      }, {})
   }
 
   get datesForDisplayCurrency() {
     const dateNow = new Date()
 
-    let date = dateNow.getDate()
-    let month = dateNow.getMonth() + 1
-    const year = dateNow.getFullYear()
+    let date = dateNow.getUTCDate()
+    let month = dateNow.getUTCMonth() + 1
+    const year = dateNow.getUTCFullYear()
 
     if (date.toString().length === 1) date = '0' + date
     if (month.toString().length === 1) month = '0' + month

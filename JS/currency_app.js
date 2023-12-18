@@ -17,7 +17,7 @@ let exchangeRate = 1
 //   base: 'USD',
 // }
 
-const URL = 'https://api.fxratesapi.com'
+const URL = 'https://api.fxrateseapi.com'
 const options = {
   currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
   format: 'json',

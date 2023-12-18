@@ -2,6 +2,9 @@
 temp*
 /JS/weather-app-temp.js
 /JS/weather-app-temp.js
+/JS/currency_timeseries_old.json
+/JS/currency_latest_old.*
+/JS/Currency_class_old.*
 snake-app-snake-backup.js
 snake-app-snake-backup.js
 snake-app-snake-backup2.js
