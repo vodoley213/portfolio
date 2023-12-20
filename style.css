@@ -252,6 +252,10 @@ svg {
   padding-block: var(--size-600);
 }
 
+.padding-top-600 {
+  padding-top: var(--size-600);
+}
+
 .padding-bottom-400 {
   padding-bottom: var(--size-400);
 }

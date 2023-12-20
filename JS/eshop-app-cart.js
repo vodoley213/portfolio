@@ -75,13 +75,14 @@ shopingCartContainer.addEventListener('click', e => {
     const infexOfItem = shoppingCart.indexOf(itemInCartArray)
     shoppingCart.splice(infexOfItem, 1)
     parentOfItem.remove()
-    cartTotalSumField.classList.add('visibility-hidden')
+    
   } else {
     itemQuantityField.textContent = itemQuantity
     itemInCartArray.qty = itemQuantity
   }
   if (shoppingCart.length === 0) {
     emptycart.classList.remove('display-none')
+    cartTotalSumField.classList.add('visibility-hidden')
   } else {
     totalSumInCart()
   }
