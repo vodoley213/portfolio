@@ -17,7 +17,7 @@ let exchangeRate = 1
 //   base: 'USD',
 // }
 
-const URL = 'https://api.fxrateseapi.com'
+const URL = 'https://api.fxratesapi.com'
 const options = {
   currencies: 'USD,EUR,RUB,TRY,KZT,CAD,GBP,CHF',
   format: 'json',
@@ -51,7 +51,7 @@ currencyRatesForYear = Object.keys({ ...currencyRatesForYear })
 
 const currencyDatesForYear = Object.values(currencyRatesForYear)
 
-// 3. Устанавливаем курсы валют в зивисимости от выбранных валют
+// 3. Устанавливаем курсы валют в зависимости от выбранных валют
 // setCurrencyRate()
 
 setCurrencyRate()
@@ -256,15 +256,18 @@ async function getCurrencyForYear(options) {
 function datesForDisplayCurrency() {
   const dateNow = new Date()
 
-  let date = dateNow.getUTCDate()
+  let day = dateNow.getUTCDate()
+  let startDay = day + 1
   let month = dateNow.getUTCMonth() + 1
   const year = dateNow.getUTCFullYear()
 
-  if (date.toString().length === 1) date = '0' + date
+  if (day.toString().length === 1) day = '0' + day
+  if (startDay.toString().length === 1) startDay = '0' + startDay
   if (month.toString().length === 1) month = '0' + month
+
   return {
-    startDate: `${year - 1}-${month}-${date}`,
-    endDate: `${year}-${month}-${date}`,
+    startDate: `${year - 1}-${month}-${startDay}`,
+    endDate: `${year}-${month}-${day}`,
   }
 }
 
